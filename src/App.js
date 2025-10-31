@@ -1,4 +1,5 @@
-// src/App.js
+// src/App.js - ATUALIZADO COM A ROTA DE EDIÇÃO
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; 
@@ -11,7 +12,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 import MyCollection from './pages/MyCollection';
 import AddItem from './pages/AddItem';
-import ItemDetail from './pages/ItemDetail'; // 1. IMPORTAR A NOVA PÁGINA DE DETALHE
+import ItemDetail from './pages/ItemDetail';
+import EditItem from './pages/EditItem'; // 1. IMPORTAR A NOVA PÁGINA DE EDIÇÃO
 
 import './App.css'; 
 
@@ -30,19 +32,17 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/my-collection" element={<MyCollection />} />
             
-            {/* O /add-item foi REMOVIDO DAQUI para se tornar uma rota de modal 
-              Adicione outras rotas do seu sidebar aqui no futuro
-            */}
+            {/* Adicione outras rotas do seu sidebar aqui no futuro */}
             {/* <Route path="/add-with-ia" element={<AddWithIA />} /> */}
             {/* <Route path="/my-showcase" element={<MyShowcase />} /> */}
           </Route>
 
-          {/* Rotas de Modal (renderizam por cima de tudo, sem a sidebar)
-            Usamos um <ProtectedRoute> separado para elas.
-          */}
+          {/* Rotas de Modal (renderizam por cima de tudo) */}
           <Route element={<ProtectedRoute />}>
               <Route path="/add-item" element={<AddItem />} />
               <Route path="/item/:itemId" element={<ItemDetail />} /> 
+              {/* 2. ADICIONAR A ROTA DE EDIÇÃO */}
+              <Route path="/edit-item/:itemId" element={<EditItem />} />
           </Route>
 
         </Routes>

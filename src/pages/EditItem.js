@@ -1,8 +1,59 @@
-// src/pages/AddItem.js - CORRIGIDO O FOOTER STICKY
+// src/pages/EditItem.js - CORRIGIDO O FOOTER STICKY
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MdAddAPhoto, MdClose } from 'react-icons/md';
+
+// --- DADOS SIMULADOS ---
+const initialCollectionData = [
+  { 
+    id: 1, 
+    nome: "Scooby-Doo The Mystery Machine",
+    categoria: "Miniaturas",
+    marca: "Hot Wheels",
+    modelo: "The Mystery Machine",
+    fabricante: "Mattel",
+    ano: "2021",
+    serie: "Hot Wheels Premium",
+    descricao: "Modelo do furgão Mystery Machine do desenho Scooby-Doo. Raro de encontrar.",
+    analiseCondicao: "Embalagem em perfeito estado, sem vincos.",
+    condicao: "Excelente",
+    raridade: "Raro",
+    escala: "1:64",
+    notasAdicionais: "Comprado na convenção.",
+    visivelVitrine: true,
+    valorPago: 150.00,
+    valorEstimado: 170.00,
+    dataAquisicao: "2023-05-10",
+    localCompra: "Convenção Anual",
+    exibirValorPublicamente: true,
+    img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg" 
+  },
+   { 
+    id: 2, 
+    nome: "Nissan Skyline GT-R (R32) Imai Racing",
+    categoria: "Miniaturas",
+    marca: "Mini GT",
+    modelo: "Nissan Skyline GT-R (R32)",
+    fabricante: "Mini GT",
+    ano: "2022",
+    serie: "Imai Racing",
+    descricao: "Miniatura Mini GT com pintura de corrida Imai Racing.",
+    analiseCondicao: "Perfeito.",
+    condicao: "Mint",
+    raridade: "Comum",
+    escala: "1:64",
+    notasAdicionais: "",
+    visivelVitrine: true,
+    valorPago: 140.00,
+    valorEstimado: 140.00,
+    dataAquisicao: "2023-01-15",
+    localCompra: "Loja Online",
+    exibirValorPublicamente: false,
+    img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg"
+  },
+];
+// --- FIM DOS DADOS SIMULADOS ---
 
 // Lista Completa de Categorias
 const allCategories = [
@@ -22,30 +73,23 @@ const ToggleSwitch = ({ label, name, checked, onChange }) => (
   </label>
 );
 
-function AddItem() {
+function EditItem() {
   const navigate = useNavigate();
-  // Estado para o formulário com TODOS os novos campos
-  const [formData, setFormData] = useState({
-    nome: '',
-    categoria: '',
-    marca: '',
-    modelo: '',
-    fabricante: '',
-    ano: '',
-    serie: '',
-    descricao: '',
-    analiseCondicao: '', 
-    condicao: '',
-    raridade: '',
-    escala: '', 
-    notasAdicionais: '', 
-    visivelVitrine: false, 
-    valorPago: '', 
-    valorEstimado: '', 
-    dataAquisicao: '', 
-    localCompra: '', 
-    exibirValorPublicamente: false, 
-  });
+  const { itemId } = useParams(); 
+  const [formData, setFormData] = useState(null); 
+
+  useEffect(() => {
+    const itemToEdit = initialCollectionData.find(
+      (i) => i.id === parseInt(itemId)
+    );
+    
+    if (itemToEdit) {
+      setFormData(itemToEdit); 
+    } else {
+      alert("Item não encontrado!");
+      navigate('/my-collection');
+    }
+  }, [itemId, navigate]); 
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,26 +101,36 @@ function AddItem() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Item a ser adicionado:", formData);
-    alert("Simulação: Item adicionado com sucesso!");
-    navigate('/my-collection'); 
+    console.log("Item a ser atualizado:", formData);
+    alert("Simulação: Item atualizado com sucesso!");
+    navigate(`/item/${itemId}`); 
   };
 
   const handleOverlayClick = () => {
-    navigate('/my-collection');
+    navigate(`/item/${itemId}`);
   };
 
   const handleModalClick = (e) => {
     e.stopPropagation();
   };
 
+  if (!formData) {
+    return (
+      <div className="add-item-modal-overlay">
+        <div className="add-item-modal">
+          <p style={{ padding: '20px' }}>Carregando dados do item...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="add-item-modal-overlay" onClick={handleOverlayClick}>
       <div className="add-item-modal" onClick={handleModalClick}>
         
         <header className="modal-header">
-          <h3>Adicionar Novo Item</h3>
-          <button className="close-btn" onClick={() => navigate('/my-collection')}>
+          <h3>Editar Item</h3>
+          <button className="close-btn" onClick={() => navigate(`/item/${itemId}`)}>
             <MdClose size={24} />
           </button>
         </header>
@@ -84,11 +138,10 @@ function AddItem() {
         {/* =================================================================== */}
         {/* CORREÇÃO AQUI: <form> agora envolve o content e o footer */}
         <form onSubmit={handleSubmit} className="modal-form-wrapper">
-          
+
           {/* O CONTEÚDO QUE ROLA */}
           <div className="modal-form-content">
 
-            {/* SEÇÃO DE IMAGENS */}
             <div className="form-section modal-images-section">
               <h4>Imagens do Item (0/5)</h4>
               <button type="button" className="select-images-btn">
@@ -96,19 +149,17 @@ function AddItem() {
               </button>
             </div>
 
-            {/* SEÇÃO INFORMAÇÕES BÁSICAS */}
             <div className="form-section">
               <h4>Informações Básicas</h4>
-              <p className="form-section-subtitle">Marque os campos que você já conhece. A IA preencherá os demais.</p>
+              <p className="form-section-subtitle">Ajuste os campos necessários.</p>
               
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Nome do Item *</label>
-                <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Ex: Hot Wheels Elite 64 Porsche 911" required />
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
               </div>
 
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Categoria *</label>
                   <select name="categoria" value={formData.categoria} onChange={handleChange} required>
                     <option value="">Selecione...</option>
@@ -116,59 +167,50 @@ function AddItem() {
                        <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Marca</label>
-                  <input type="text" name="marca" value={formData.marca} onChange={handleChange} placeholder="Ex: Hot Wheels, Mattel, Hasbro..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                  <input type="text" name="marca" value={formData.marca} onChange={handleChange} />
                 </div>
               </div>
 
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Modelo</label>
-                  <input type="text" name="modelo" value={formData.modelo} onChange={handleChange} placeholder="Ex: Porsche 911 GT3, Toyota Supra..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                  <input type="text" name="modelo" value={formData.modelo} onChange={handleChange} />
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Fabricante</label>
-                  <input type="text" name="fabricante" value={formData.fabricante} onChange={handleChange} placeholder="Ex: Mattel Inc., Hasbro..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                  <input type="text" name="fabricante" value={formData.fabricante} onChange={handleChange} />
                 </div>
               </div>
 
                <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Ano</label>
-                  <input type="text" name="ano" value={formData.ano} onChange={handleChange} placeholder="Ex: 2023" />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                  <input type="text" name="ano" value={formData.ano} onChange={handleChange} />
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Série/Coleção</label>
-                  <input type="text" name="serie" value={formData.serie} onChange={handleChange} placeholder="Ex: Fast & Furious, Premium..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                  <input type="text" name="serie" value={formData.serie} onChange={handleChange} />
                 </div>
               </div>
 
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Descrição</label>
-                <textarea name="descricao" rows="3" value={formData.descricao} onChange={handleChange} placeholder="A IA pode preencher isso automaticamente..."></textarea>
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                <textarea name="descricao" rows="3" value={formData.descricao} onChange={handleChange}></textarea>
               </div>
               
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Análise da Condição Física</label>
-                <textarea name="analiseCondicao" rows="3" value={formData.analiseCondicao} onChange={handleChange} placeholder="A IA vai analisar embalagem, riscos, desgaste e outros detalhes..."></textarea>
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                <textarea name="analiseCondicao" rows="3" value={formData.analiseCondicao} onChange={handleChange}></textarea>
               </div>
             </div>
 
-            {/* SEÇÃO DETALHES DO ITEM */}
             <div className="form-section">
               <h4>Detalhes do Item</h4>
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Condição</label>
                   <select name="condicao" value={formData.condicao} onChange={handleChange}>
                     <option value="">Selecione...</option>
@@ -178,9 +220,8 @@ function AddItem() {
                     <option value="aceitavel">Aceitável</option>
                     <option value="loose">Loose</option>
                   </select>
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Raridade</label>
                   <select name="raridade" value={formData.raridade} onChange={handleChange}>
                     <option value="">Selecione...</option>
@@ -190,13 +231,12 @@ function AddItem() {
                     <option value="super">Super T-Hunt</option>
                     <option value="ultra">Ultra Raro</option>
                   </select>
-                   <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
               </div>
 
               <div className="input-group full-width">
                 <label>Escala (se aplicável)</label>
-                <input type="text" name="escala" value={formData.escala} onChange={handleChange} placeholder="Ex: 1:64, 1:18, 1:43..." />
+                <input type="text" name="escala" value={formData.escala} onChange={handleChange} />
               </div>
 
               <div className="input-group full-width">
@@ -212,17 +252,16 @@ function AddItem() {
               />
             </div>
 
-            {/* SEÇÃO INFORMAÇÕES DE COMPRA */}
             <div className="form-section">
               <h4>Informações de Compra (Opcional)</h4>
               <div className="form-row">
                 <div className="input-group">
                   <label>Valor Pago</label>
-                  <input type="number" step="0.01" name="valorPago" value={formData.valorPago} onChange={handleChange} placeholder="0.00" />
+                  <input type="number" step="0.01" name="valorPago" value={formData.valorPago} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>Valor Estimado (Mercado)</label>
-                  <input type="number" step="0.01" name="valorEstimado" value={formData.valorEstimado} onChange={handleChange} placeholder="0.00" />
+                  <input type="number" step="0.01" name="valorEstimado" value={formData.valorEstimado} onChange={handleChange} />
                 </div>
               </div>
               <div className="form-row">
@@ -249,14 +288,14 @@ function AddItem() {
 
           {/* RODAPÉ STICKY (AGORA FORA DO CONTENT) */}
           <footer className="modal-footer">
-            <button type="button" className="btn-cancel" onClick={() => navigate('/my-collection')}>
+            <button type="button" className="btn-cancel" onClick={() => navigate(`/item/${itemId}`)}>
               Cancelar
             </button>
             <button type="submit" className="btn-save">
-              Salvar Item
+              Salvar Alterações
             </button>
           </footer>
-          
+
         </form> {/* FIM DO .modal-form-wrapper */}
         {/* =================================================================== */}
 
@@ -265,4 +304,4 @@ function AddItem() {
   );
 }
 
-export default AddItem;
+export default EditItem;

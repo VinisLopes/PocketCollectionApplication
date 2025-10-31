@@ -1,12 +1,13 @@
+/* src/App.css - VERSÃO COMPLETA (CORRIGIDO FOOTER E BORDAS) */
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #eef2f6; /* NOVA COR DE FUNDO GLOBAL: Cinza azulado muito claro */
-  color: #212529; /* Cor do texto principal */
+  background-color: #eef2f6; 
+  color: #212529; 
 }
 
-/* Container principal para centralizar o card (Telas de Login/Cadastro) */
+/* === PARTE 1: AUTENTICAÇÃO === */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -15,8 +16,6 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
-
-/* O card branco central (Telas de Login/Cadastro) */
 .auth-card {
   background: #ffffff;
   border-radius: 16px;
@@ -27,23 +26,17 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
-
-/* Título principal (ex: "Welcome to Pocket Collection") */
 .auth-title {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
   color: #111827;
 }
-
-/* Subtítulo (ex: "Sign in to continue") */
 .auth-subtitle {
   font-size: 16px;
   color: #6c757d;
   margin-bottom: 24px;
 }
-
-/* Botão secundário (ex: Google) */
 .btn-secondary {
   display: flex;
   justify-content: center;
@@ -60,22 +53,17 @@ body {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 .btn-secondary:hover {
   background-color: #f9fafb;
 }
-
 .btn-secondary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 .btn-secondary img {
   width: 20px;
   height: 20px;
 }
-
-/* Divisor "OR" */
 .divider {
   display: flex;
   align-items: center;
@@ -85,51 +73,41 @@ body {
   font-size: 14px;
   font-weight: 500;
 }
-
 .divider::before,
 .divider::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #e5e7eb;
 }
-
 .divider:not(:empty)::before {
   margin-right: .25em;
 }
-
 .divider:not(:empty)::after {
   margin-left: .25em;
 }
-
-/* Grupo de formulário (label + input com ícone) */
 .form-group {
   margin-bottom: 20px;
   text-align: left;
   position: relative;
 }
-
 .form-group label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 14px;
 }
-
 .form-input {
   width: 100%;
-  padding: 12px 12px 12px 40px; /* Padding à esquerda para o ícone */
+  padding: 12px 12px 12px 40px; 
   font-size: 16px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-sizing: border-box;
   color: #374151;
 }
-
 .form-input::placeholder {
   color: #adb5bd;
 }
-
-/* Ícone dentro do input */
 .input-icon {
   position: absolute;
   left: 12px;
@@ -140,8 +118,6 @@ body {
   color: #9ca3af;
   pointer-events: none;
 }
-
-/* Botão Primário (ex: "Sign In") */
 .btn-primary {
   width: 100%;
   padding: 14px;
@@ -154,34 +130,26 @@ body {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 .btn-primary:hover {
   background-color: #374151;
 }
-
-/* Links inferiores (ex: "Forgot password?") */
 .auth-links {
   display: flex;
   justify-content: space-between;
   margin-top: 24px;
 }
-
 .auth-link {
   color: #1f2937;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
 }
-
 .auth-link:hover {
   text-decoration: underline;
 }
-
-.auth-link span { /* Para o "Sign up" */
+.auth-link span { 
   color: #007bff;
 }
-
-/* Link de "Voltar" (para telas de Cadastro/Recuperação) */
 .back-link {
   display: flex;
   align-items: center;
@@ -192,7 +160,6 @@ body {
   margin-bottom: 24px;
   text-align: left;
 }
-
 .back-link:hover {
   color: #1f2937;
 }
@@ -200,13 +167,10 @@ body {
 
 /* === PARTE 2: LAYOUT DA ÁREA LOGADA (SIDEBAR + DASHBOARD) === */
 
-/* --- 1. Layout Principal (Sidebar + Conteúdo) --- */
-
 .layout-container {
   display: flex;
-  background-color: #eef2f6; /* NOVA COR DE FUNDO */
+  background-color: #eef2f6; 
 }
-
 .sidebar {
   width: 260px;
   height: 100vh;
@@ -220,17 +184,13 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .main-content {
-  margin-left: 260px; /* O espaço da sidebar */
+  margin-left: 260px; 
   width: calc(100% - 260px);
   padding: 32px;
   box-sizing: border-box;
-  background-color: #eef2f6; /* NOVA COR DE FUNDO */
+  background-color: #eef2f6; 
 }
-
-/* --- 2. Estilos da Sidebar --- */
-/* ... (esta parte permanece a mesma) ... */
 .sidebar-logo {
   margin-bottom: 24px;
 }
@@ -246,12 +206,11 @@ body {
   font-weight: 500;
   color: #6b7280;
 }
-
 .sidebar-menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Empurra o footer para baixo */
+  flex-grow: 1; 
 }
 .sidebar-menu li {
   margin-bottom: 8px;
@@ -271,12 +230,10 @@ body {
 .sidebar-menu a:hover {
   background-color: #f3f4f6;
 }
-/* Link ATIVO */
 .sidebar-menu a.active {
   background-color: #eef2ff;
   color: #4f46e5;
 }
-
 .sidebar-footer {
   border-top: 1px solid #e5e7eb;
   padding-top: 16px;
@@ -307,7 +264,6 @@ body {
 
 
 /* === PARTE 3: ESTILOS DO DASHBOARD (HOME.JS) === */
-/* ... (esta parte permanece a mesma) ... */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -326,7 +282,7 @@ body {
   margin: 0;
 }
 .export-btn {
-  background-color: #10b981; /* Verde */
+  background-color: #10b981; 
   color: white;
   border: none;
   padding: 12px 20px;
@@ -339,20 +295,16 @@ body {
 .export-btn:hover {
   background-color: #059669;
 }
-
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 para a coluna 1, 1/3 para a coluna 2 */
+  grid-template-columns: 2fr 1fr; 
   gap: 24px;
 }
-
 .dashboard-col {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-
-/* Card Básico */
 .dashboard-card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -360,8 +312,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   border: 1px solid #e5e7eb;
 }
-
-/* Cards de Status (Itens, Valor) */
 .status-cards-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -395,8 +345,6 @@ body {
 }
 .stat-icon.blue { background-color: #eef2ff; color: #4f46e5; }
 .stat-icon.green { background-color: #e0fdf4; color: #10b981; }
-
-/* Card Joia da Coleção */
 .jewel-card h4 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -416,7 +364,7 @@ body {
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background-color: rgba(255, 204, 0, 0.9); /* Amarelo */
+  background-color: rgba(255, 204, 0, 0.9); 
   color: #111827;
   padding: 6px 12px;
   border-radius: 20px;
@@ -442,17 +390,13 @@ body {
 .jewel-footer strong {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #eab308; /* Tom de Dourado/Laranja */
+  color: #eab308; 
 }
-
-/* Card Categoria */
 .category-card h4 {
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0 0 16px 0;
 }
-
-/* NOVO ESTILO: Lista de Contagem por Categoria */
 .category-list-counts {
   list-style: none;
   padding: 0;
@@ -466,7 +410,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid #f3f4f6; /* Linha divisória sutil */
+  border-bottom: 1px solid #f3f4f6; 
 }
 .category-item-count:last-child {
   border-bottom: none;
@@ -485,7 +429,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #a78bfa; /* Lilás (cor de exemplo) */
+  background-color: #a78bfa; 
 }
 .category-count {
   background-color: #eef2ff;
@@ -495,8 +439,6 @@ body {
   font-size: 0.85rem;
   font-weight: 700;
 }
-
-/* Card Últimas Aquisições */
 .acquisitions-card h4 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -529,7 +471,6 @@ body {
   margin: 0;
   font-weight: 600;
   font-size: 0.9rem;
-  /* Cortar texto longo */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -544,8 +485,6 @@ body {
   font-weight: 600;
   color: #10b981;
 }
-
-/* Card Atividade Recente */
 .activity-card h4 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -579,24 +518,19 @@ body {
 .activity-time { font-size: 0.8rem; color: #9ca3af; }
 
 
-/* === PARTE 4: ESTILOS DA PÁGINA MINHA COLEÇÃO E MODAL (FINAL) === */
+/* === PARTE 4: ESTILOS DA PÁGINA MINHA COLEÇÃO === */
 
-/* NOVO CONTAINER QUE ENVOLVE TÍTULO E CARDS DE STATUS */
 .collection-page-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
 }
-
-/* CARDS DE STATUS (NOVO CONTAINER PARA ELES) */
 .collection-status-cards-row {
     display: flex;
-    gap: 20px; /* Espaçamento entre os cards */
+    gap: 20px; 
     justify-content: flex-end;
 }
-
-/* Card de Status Individual */
 .collection-status-card {
   background-color: #ffffff;
   padding: 15px 20px;
@@ -618,8 +552,6 @@ body {
   font-weight: 700;
   margin: 0;
 }
-
-/* Cabeçalho (SÓ TÍTULO) */
 .collection-header {
   display: flex;
   flex-direction: column;
@@ -637,8 +569,6 @@ body {
   color: #6b7280;
   margin: 0;
 }
-
-/* Botão Adicionar Item (Já está em #4f46e5) */
 .add-item-btn {
   background-color: #4f46e5;
   color: white;
@@ -656,25 +586,19 @@ body {
 .add-item-btn:hover {
   background-color: #4338ca;
 }
-
-/* Linha de Filtros/Pesquisa (Harmonizando Layout) */
 .collection-tools-bar {
   background-color: white;
-  padding: 24px; /* AUMENTADO: Mais espaçamento interno */
+  padding: 24px; 
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 32px;
 }
-
-/* Contêiner que agora só tem a busca, e se expande */
 .search-filter-row-only-search {
     display: flex;
     flex-grow: 1;
-    max-width: 500px; /* AJUSTADO: Limita a largura */
-    margin-bottom: 24px; /* AUMENTADO: Espaçamento entre a busca e a linha de filtros */
+    max-width: 500px; 
+    margin-bottom: 24px; 
 }
-
-/* Garante que o search-box interno se ajuste à largura limitada */
 .search-box {
   position: relative;
   flex-grow: 1;
@@ -695,7 +619,7 @@ body {
   color: #9ca3af;
   font-size: 1.2rem;
 }
-.filter-btn { /* Este estilo não será usado se você removeu o botão "Filtros" */
+.filter-btn { 
   background-color: #ffffff;
   color: #4b5563;
   border: 1px solid #d1d5db;
@@ -709,18 +633,16 @@ body {
 .filter-btn:hover {
   background-color: #f3f4f6;
 }
-
-/* Filtros Avançados (Categoria, Ordenação E BOTÃO ADICIONAR) */
 .collection-advanced-filters {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 40px; /* AUMENTADO: Espaçamento entre os elementos da linha de filtro */
+  gap: 40px; 
 }
 .select-group {
   display: flex;
   flex-direction: column;
-  min-width: 210px; /* AJUSTADO: Largura mínima */
+  min-width: 210px; 
 }
 .select-group label {
   font-size: 0.85rem;
@@ -736,8 +658,6 @@ body {
   background-color: white;
   cursor: pointer;
 }
-
-/* Botão Adicionar Item (Ao lado dos filtros) */
 .add-item-btn-small {
   background-color: #4f46e5;
   color: white;
@@ -750,37 +670,32 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 40px; /* Fixa a altura */
-  margin-top: 28px; /* Move para baixo para alinhar com o seletor */
+  height: 40px; 
+  margin-top: 28px; 
   transition: background-color 0.2s ease;
 }
 .add-item-btn-small:hover {
   background-color: #4338ca;
 }
-
-/* Grid de Cards */
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
 }
-
-/* Card Individual (CollectionCard) - ESTILO FINAL COM ANIMAÇÃO */
 .collection-card {
   background-color: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out; /* ANIMAÇÃO: Transição suave */
+  transition: all 0.3s ease-in-out; 
   height: auto;
   border: 1px solid #e5e7eb;
   cursor: pointer;
 }
 .collection-card:hover {
-  transform: translateY(-5px); /* ANIMAÇÃO: Levanta o card */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* ANIMAÇÃO: Sombra mais pronunciada */
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
 }
-
 .card-image-container {
   position: relative;
   height: 200px;
@@ -791,8 +706,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-/* Status dentro da Imagem */
 .card-status {
   position: absolute;
   top: 10px;
@@ -803,11 +716,9 @@ body {
   font-weight: 600;
   color: white;
 }
-/* Estilos de Status */
 .card-status.excelente { background-color: #10b981; }
 .card-status.mint { background-color: #4f46e5; }
 .card-status.loose { background-color: #f59e0b; }
-
 .card-details {
   padding: 16px;
 }
@@ -828,8 +739,6 @@ body {
   margin: 0;
   color: #6b7280;
 }
-
-/* Footer do Card - Corrigindo sobreposição */
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -842,7 +751,6 @@ body {
   color: #111827;
 }
 .card-status-label {
-    /* Status no rodapé */
     font-size: 0.8rem;
     padding: 4px 8px;
     border-radius: 4px;
@@ -852,9 +760,9 @@ body {
 }
 
 
-/* --- 5. ESTILOS DO MODAL "ADICIONar ITEM" --- */
+/* === PARTE 5: ESTILOS ATUALIZADOS PARA OS NOVOS MODAIS === */
 
-/* Simulamos um modal com uma página que se sobrepõe */
+/* --- Estilo Geral do Overlay (Fundo) --- */
 .add-item-modal-overlay {
   position: fixed;
   top: 0;
@@ -866,123 +774,160 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 20px; 
+  box-sizing: border-box;
 }
 
+/* --- Estilo Geral do Modal (Caixa Branca) --- */
 .add-item-modal {
   background-color: #ffffff;
   border-radius: 12px;
   width: 90%;
-  max-width: 900px;
+  max-width: 700px; 
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  height: 90vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column; 
+  max-height: 90vh; 
 }
 
+/* --- Cabeçalho do Modal --- */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 20px 24px; 
   border-bottom: 1px solid #e5e7eb;
-  position: sticky;
+  position: sticky; 
   top: 0;
-  background-color: white;
-  z-index: 10;
+  background-color: white; 
+  z-index: 10; 
+  border-top-left-radius: 12px; /* Garante borda arredondada no topo */
+  border-top-right-radius: 12px; /* Garante borda arredondada no topo */
 }
 .modal-header h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem; 
   font-weight: 700;
+  color: #111827;
 }
 .close-btn {
   background: none;
   border: none;
   cursor: pointer;
   color: #6b7280;
+  padding: 5px; 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .close-btn:hover {
+  background-color: #f3f4f6;
   color: #111827;
 }
 
+/* --- Wrapper do Formulário (NOVO) --- */
+/* Isso permite que o footer fique sticky e o conteúdo role */
+.modal-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ocupa o espaço restante */
+  overflow: hidden; /* Garante que o footer sticky funcione */
+}
+
+/* --- Conteúdo Rolável do Modal --- */
 .modal-form-content {
-  padding: 30px;
+  padding: 24px;
+  overflow-y: auto; /* Permite rolar apenas o conteúdo */
+  flex-grow: 1; /* Ocupa o espaço restante */
 }
 
-.modal-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 30px;
+/* --- Seção de Imagens (AddItem) --- */
+.modal-images-section {
+  text-align: center; 
 }
-
-/* Coluna de Imagens */
-.modal-images-col {
-  padding-right: 20px;
-  border-right: 1px solid #e5e7eb; /* Divisor sutil */
-}
-.modal-images-col h4 {
-  font-size: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-weight: 600;
+.modal-images-section h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: #111827;
+    text-align: left; 
 }
 .select-images-btn {
   width: 100%;
-  height: 120px;
+  padding: 30px 20px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px; 
   border: 2px dashed #d1d5db;
   background-color: #f9fafb;
   border-radius: 8px;
   color: #4b5563;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 1rem;
 }
 .select-images-btn:hover {
   border-color: #4f46e5;
   color: #4f46e5;
+  background-color: #f0f0ff; 
+}
+.select-images-btn svg {
+  font-size: 1.5rem; 
 }
 
-/* Coluna de Informações */
-.modal-info-col {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
 
+/* --- Seções do Formulário (AddItem) --- */
 .form-section {
+  margin-top: 24px; 
   padding-bottom: 24px;
   border-bottom: 1px solid #e5e7eb;
 }
-.form-section:last-child {
+.form-section:last-of-type { 
   border-bottom: none;
+  padding-bottom: 0;
 }
 .form-section h4 {
   font-size: 1.2rem;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 8px; 
+  color: #111827;
 }
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+.form-section-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: -4px;
   margin-bottom: 20px;
 }
 
+/* Linhas com 2 colunas */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr; 
+  gap: 20px;
+  margin-bottom: 20px;
+}
+@media (min-width: 600px) { 
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.form-row > .input-group:last-child {
+  margin-bottom: 0;
+}
 .input-group {
   display: flex;
   flex-direction: column;
+  position: relative; 
 }
 .input-group label {
   font-size: 0.9rem;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 6px;
+  margin-bottom: 8px; 
 }
 .input-group input, .input-group select, .input-group textarea {
   padding: 10px 12px;
@@ -990,51 +935,148 @@ body {
   border-radius: 6px;
   font-size: 1rem;
   box-sizing: border-box;
+  width: 100%; 
+  font-family: inherit; 
+}
+.input-group input::placeholder, .input-group textarea::placeholder {
+  color: #9ca3af;
 }
 .input-group select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 8px center;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 10px center;
   background-size: 16px;
+  padding-right: 35px; 
+  background-color: white;
 }
 .input-group textarea {
   resize: vertical;
+  min-height: 80px; 
+}
+.input-group.full-width {
+    margin-bottom: 20px; 
 }
 
-/* Checkbox (Visível na vitrine) */
+/* Checkbox lateral (Já sei) */
+.input-group.with-checkbox {
+  padding-right: 80px; 
+}
+.side-checkbox {
+  position: absolute;
+  right: 0;
+  top: 35px; 
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+  cursor: pointer;
+}
+.side-checkbox input {
+  margin-right: 6px;
+  height: 16px;
+  width: 16px;
+}
+.input-group.full-width.with-checkbox textarea + .side-checkbox {
+  top: 8px;
+}
+
+/* Checkbox (Visível na vitrine - antigo) */
 .checkbox-group {
   display: flex;
   align-items: center;
   font-size: 0.95rem;
   font-weight: 500;
   color: #374151;
-  margin-top: 10px;
+  margin-top: 15px; 
+  cursor: pointer;
 }
 .checkbox-group input {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
+  width: 18px; 
+  height: 18px;
+  margin-right: 12px; 
+  cursor: pointer;
 }
 
-/* Rodapé do Modal (Botões de Ação) */
+/* --- Estilos para os Botões "Switch/Toggle" --- */
+.switch-toggle-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px; 
+  height: 28px; 
+}
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; 
+  width: 20px;  
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #4f46e5; 
+}
+input:checked + .slider:before {
+  transform: translateX(22px); 
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/* --- Rodapé do Modal (Botões de Ação) --- */
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-  padding: 20px 30px;
+  padding: 16px 24px; 
   border-top: 1px solid #e5e7eb;
-  background-color: #ffffff;
-  position: sticky;
+  background-color: #f9fafb; 
+  position: sticky; 
   bottom: 0;
-  z-index: 10;
+  z-index: 10; 
+  border-bottom-left-radius: 12px; /* Garante borda arredondada no rodapé */
+  border-bottom-right-radius: 12px; /* Garante borda arredondada no rodapé */
 }
-.btn-cancel, .btn-save {
-  padding: 10px 20px;
+.btn-cancel, .btn-save, .btn-edit, .btn-delete {
+  padding: 10px 24px; 
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  font-size: 0.95rem; 
+  border: none;
 }
 .btn-cancel {
   background: none;
@@ -1043,26 +1085,133 @@ body {
 }
 .btn-cancel:hover {
   background-color: #f3f4f6;
+  border-color: #adb5bd;
 }
 .btn-save {
-  background-color: #4f46e5; /* Roxo/Azul principal */
+  background-color: #4f46e5; 
   color: white;
-  border: none;
 }
 .btn-save:hover {
   background-color: #4338ca;
 }
-/* src/App.css - ADICIONE NO FINAL */
+
+/* --- Botões Editar/Excluir (ItemDetail) --- */
+.btn-edit {
+  background-color: #4f46e5;
+  color: white;
+}
+.btn-edit:hover {
+  background-color: #4338ca;
+}
+.btn-delete {
+  background: none;
+  color: #dc3545; 
+  border: 1px solid #dc3545;
+  margin-right: auto; 
+}
+.btn-delete:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+/* --- Estilos do Modal ItemDetail (Visualização) --- */
+.item-detail-modal-view {
+  max-width: 900px; 
+}
+.item-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr; 
+  gap: 30px;
+}
+@media (min-width: 768px) {
+  .item-detail-grid {
+    grid-template-columns: 300px 1fr; 
+  }
+}
+.item-detail-image-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: start; 
+}
+.item-detail-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.item-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.item-detail-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+.item-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.detail-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: #eef2f6;
+  color: #4b5563;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.detail-tag.status-excelente { background-color: #10b981; color: white;}
+.detail-tag.status-mint { background-color: #4f46e5; color: white;}
+.detail-tag.status-loose { background-color: #f59e0b; color: white;}
+.detail-tag.status-bom { background-color: #3b82f6; color: white;}
+.detail-tag.status-aceitavel { background-color: #6b7280; color: white;}
+.info-section {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.info-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.info-group-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.info-group {
+  margin-bottom: 12px;
+  flex: 1;
+  min-width: 200px;
+}
+.info-group span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.info-group p {
+  font-size: 1rem;
+  color: #111827;
+  margin: 0;
+  line-height: 1.5;
+}
+
+
 
 /* === PARTE 6: ESTILOS RESPONSIVOS PARA MOBILE === */
 
-/* --- Estilos Base (Mobile First - Opcional, mas boa prática) --- */
-/* (Poderíamos reestruturar todo o CSS para ser mobile-first,
-   mas por agora vamos usar media queries para sobrescrever) */
-
-/* --- Estilos do Mobile Header --- */
 .mobile-header {
-  display: none; /* Escondido por padrão (visível só no @media) */
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
@@ -1073,10 +1222,9 @@ body {
   padding: 0 16px;
   box-sizing: border-box;
   align-items: center;
-  z-index: 1000; /* Fica acima do conteúdo */
+  z-index: 1000; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 .hamburger-btn {
   background: none;
   border: none;
@@ -1088,69 +1236,57 @@ body {
 .hamburger-btn:hover {
   color: #111827;
 }
-
 .mobile-header-title {
   font-size: 1.2rem;
   font-weight: 700;
   color: #111827;
 }
-
-/* --- Estilo do Overlay (fundo escuro) --- */
 .sidebar-overlay {
-  display: none; /* Escondido por padrão */
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
-  z-index: 1000; /* Fica entre a sidebar e o conteúdo */
-  cursor: pointer; /* Indica que pode ser clicado para fechar */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+  cursor: pointer; 
 }
 
 
 /* --- Media Query para Telas Pequenas (ex: Tablets e Celulares) --- */
-@media (max-width: 992px) { /* Ajuste este valor se necessário */
+@media (max-width: 992px) { 
 
-  /* 1. Mostra o Header Mobile e Esconde a Sidebar Fixa */
   .mobile-header {
-    display: flex; /* Torna o header visível */
+    display: flex; 
   }
-
   .sidebar {
-    position: fixed; /* Muda para fixo para poder deslizar */
-    left: -280px; /* Começa fora da tela (largura + extra) */
-    width: 260px; /* Mantém a largura */
+    position: fixed; 
+    left: -280px; 
+    width: 260px; 
     height: 100vh;
-    z-index: 1001; /* Fica acima do overlay e do header */
-    transition: left 0.3s ease-in-out; /* Animação de deslize */
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1); /* Sombra lateral */
+    z-index: 1001; 
+    transition: left 0.3s ease-in-out; 
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1); 
   }
-
-  /* 2. Ajusta o Conteúdo Principal */
   .main-content {
-    margin-left: 0; /* Remove a margem da sidebar fixa */
-    width: 100%;    /* Ocupa a largura total */
-    padding-top: 80px; /* Espaço para o header mobile (60px + margem) */
-    padding-left: 16px;  /* Reduz padding lateral no mobile */
-    padding-right: 16px; /* Reduz padding lateral no mobile */
+    margin-left: 0; 
+    width: 100%;    
+    padding-top: 80px; 
+    padding-left: 16px;  
+    padding-right: 16px; 
   }
-
-  /* 3. Comportamento Quando a Sidebar Estiver Aberta */
   .layout-container.sidebar-mobile-open .sidebar {
-    left: 0; /* Traz a sidebar para a tela */
+    left: 0; 
   }
-
   .layout-container.sidebar-mobile-open .sidebar-overlay {
-    display: block; /* Mostra o overlay escuro */
+    display: block; 
   }
-
-  /* Ajustes finos opcionais para elementos internos no mobile */
   .dashboard-grid {
-    grid-template-columns: 1fr; /* Coloca os cards do dashboard um embaixo do outro */
+    grid-template-columns: 1fr; 
   }
   .collection-page-header-container {
-      flex-direction: column; /* Coloca Título e Status Cards um embaixo do outro */
+      flex-direction: column; 
       align-items: flex-start;
       gap: 16px;
   }
@@ -1158,51 +1294,45 @@ body {
       justify-content: flex-start;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr; /* Mantém 2 colunas se couber */
+      grid-template-columns: 1fr 1fr; 
   }
   .collection-tools-bar {
     padding: 16px;
   }
   .collection-advanced-filters {
-    flex-direction: column; /* Coloca os filtros um embaixo do outro */
+    flex-direction: column; 
     gap: 16px;
-    align-items: stretch; /* Faz os selects ocuparem a largura */
+    align-items: stretch; 
   }
   .add-item-btn-small {
-    margin-top: 0; /* Remove margem desnecessária no mobile */
-    width: 100%; /* Botão ocupa largura total */
+    margin-top: 0; 
+    width: 100%; 
     justify-content: center;
   }
   .select-group {
-    min-width: unset; /* Remove largura mínima dos selects */
+    min-width: unset; 
   }
   .collection-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cards menores no mobile */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
     padding-right: 0;
   }
-
-  /* Ajustes para os Cards de Status no Mobile */
   .stat-card {
-    padding: 16px; /* Reduz padding interno no mobile */
+    padding: 16px; 
   }
   .stat-card p {
-    font-size: 0.8rem; /* Reduz tamanho do label */
+    font-size: 0.8rem; 
   }
   .stat-card h3 {
-    font-size: 1.5rem; /* Reduz tamanho do número */
-    margin-top: 4px; /* Menos espaço acima do número */
+    font-size: 1.5rem; 
+    margin-top: 4px; 
   }
   .stat-icon {
-    width: 32px;      /* Ícone menor */
-    height: 32px;     /* Ícone menor */
-    font-size: 1.2rem; /* Tamanho do ícone interno menor */
-    top: 12px;        /* Ajusta posição vertical */
-    right: 12px;      /* Ajusta posição horizontal */
+    width: 32px;      
+    height: 32px;     
+    font-size: 1.2rem; 
+    top: 12px;        
+    right: 12px;      
   }
-
-/* FIM DOS AJUSTES PARA CARDS DE STATUS */
-
-
 }
 
 @media (max-width: 576px) {
@@ -1212,25 +1342,64 @@ body {
       padding-right: 10px;
    }
    .collection-status-cards-row {
-       grid-template-columns: 1fr; /* Uma coluna só para status cards */
+       grid-template-columns: 1fr; 
    }
     .collection-grid {
-      grid-template-columns: 1fr; /* Uma coluna só para cards da coleção */
+      grid-template-columns: 1fr; 
    }
-   .modal-form-grid {
-      grid-template-columns: 1fr; /* Coloca imagem e form um embaixo do outro no modal */
-   }
-    .modal-images-col {
-      border-right: none;
-      padding-right: 0;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 20px;
-      margin-bottom: 20px;
+   
+    /* AJUSTES RESPONSIVOS PARA OS NOVOS MODAIS */
+    .add-item-modal-overlay {
+      padding: 10px; /* Garante um padding mínimo no mobile */
     }
+    .add-item-modal {
+       /* * CORREÇÃO DAS BORDAS REDONDAS: 
+        * As regras que faziam o modal ocupar 100% da tela 
+        * (width, height, max-height, border-radius: 0) 
+        * foram REMOVIDAS daqui. 
+        * Agora, o modal manterá suas bordas arredondadas e 
+        * o max-height: 90vh, mesmo em telas pequenas.
+       */
+    }
+
+    .modal-header {
+      padding: 12px 16px;
+    }
+    .modal-header h3 {
+      font-size: 1.1rem;
+    }
+    .modal-form-content {
+      padding: 16px;
+    }
+    .modal-footer {
+      padding: 12px 16px;
+      gap: 10px;
+    }
+    .btn-cancel, .btn-save, .btn-edit, .btn-delete {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    .form-row {
+      grid-template-columns: 1fr; 
+    }
+    .input-group.with-checkbox {
+      padding-right: 70px; 
+    }
+    .side-checkbox {
+      font-size: 0.8rem;
+    }
+    .item-detail-grid {
+      grid-template-columns: 1fr; 
+    }
+    .item-detail-image-container {
+      max-width: 100%; 
+    }
+    /* FIM DOS AJUSTES RESPONSIVOS PARA OS NOVOS MODAIS */
+
 
    /* Ajustes de Status Card para Telas Muito Pequenas */
   .stat-card h3 {
-    font-size: 1.3rem; /* Ainda menor em telas muito pequenas */
+    font-size: 1.3rem; 
   }
   .stat-icon {
     width: 28px;

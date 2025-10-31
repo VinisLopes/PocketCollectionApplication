@@ -1,53 +1,89 @@
-// src/pages/MyCollection.js - CÓDIGO FINAL COM A LISTA DE CATEGORIAS ATUALIZADA
+// src/pages/MyCollection.js - ATUALIZADO COM NOVOS CAMPOS NOS DADOS SIMULADOS
 
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdSearch, MdAdd } from 'react-icons/md';
-import CustomSelect from '../components/CustomSelect';
+// CustomSelect não está sendo usado aqui, mas pode ser adicionado de volta se necessário
+// import CustomSelect from '../components/CustomSelect';
 
-// 1. Dados SIMULADOS (Mantidos para a funcionalidade do Card)
+// 1. DADOS SIMULADOS ATUALIZADOS (Devem ser iguais aos do ItemDetail.js)
 const initialCollectionData = [
-  { id: 1, model: "Hot Wheels Premium - Scooby-Doo - The Mystery Machine", brand: "Hot Wheels", category: "Miniaturas", price: 170.00, status: "Excelente", img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg" },
-  { id: 2, model: "Nissan Skyline GT-R (R32) Imai Racing", brand: "Mini GT", category: "Miniaturas", price: 140.00, status: "Mint", img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg" },
-  { id: 3, model: "Pokemon Card - Charizard VMAX", brand: "Nintendo", category: "Cartas Pokemon", price: 360.00, status: "Mint", img: "https://images.pokemontcg.io/swsh4/136_hires.png" },
-  { id: 4, model: "Magic Card - Black Lotus", brand: "Wizards of the Coast", category: "Cartas Magic", price: 20000.00, status: "Mint", img: "https://media.wizards.com/2021/mtg/images/card/lea/Black-Lotus.jpg" },
-  { id: 5, model: "Lamborghini Huracan", brand: "Hot Wheels", category: "Miniaturas", price: 60.00, status: "Loose", img: "https://m.media-amazon.com/images/I/71-xQn5gZ3L._AC_SL1500_.jpg" },
-  { id: 6, model: "HQ - The Sandman Vol 1", brand: "Vertigo", category: "Comics/HQs", price: 70.00, status: "Loose", img: "https://m.media-amazon.com/images/I/515yY2rFfQL.jpg" },
+  { 
+    id: 1, 
+    nome: "Scooby-Doo The Mystery Machine",
+    categoria: "Miniaturas",
+    marca: "Hot Wheels",
+    modelo: "The Mystery Machine",
+    fabricante: "Mattel",
+    ano: "2021",
+    serie: "Hot Wheels Premium",
+    descricao: "Modelo do furgão Mystery Machine do desenho Scooby-Doo. Raro de encontrar.",
+    analiseCondicao: "Embalagem em perfeito estado, sem vincos.",
+    condicao: "Excelente", // Usado para o status no card
+    raridade: "Raro",
+    escala: "1:64",
+    notasAdicionais: "Comprado na convenção.",
+    visivelVitrine: true,
+    valorPago: 150.00,
+    valorEstimado: 170.00, // Usado para o preço no card
+    dataAquisicao: "2023-05-10",
+    localCompra: "Convenção Anual",
+    exibirValorPublicamente: true,
+    img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg",
+    // Campos antigos que o card usa:
+    price: 170.00, // Vamos manter 'price' para o card, apontando para o valorEstimado
+    status: "Excelente" // Vamos manter 'status' para o card, apontando para condicao
+  },
+   { 
+    id: 2, 
+    nome: "Nissan Skyline GT-R (R32) Imai Racing",
+    categoria: "Miniaturas",
+    marca: "Mini GT",
+    modelo: "Nissan Skyline GT-R (R32)",
+    fabricante: "Mini GT",
+    ano: "2022",
+    serie: "Imai Racing",
+    descricao: "Miniatura Mini GT com pintura de corrida Imai Racing.",
+    analiseCondicao: "Perfeito.",
+    condicao: "Mint",
+    raridade: "Comum",
+    escala: "1:64",
+    notasAdicionais: "",
+    visivelVitrine: true,
+    valorPago: 140.00,
+    valorEstimado: 140.00,
+    dataAquisicao: "2023-01-15",
+    localCompra: "Loja Online",
+    exibirValorPublicamente: false,
+    img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg",
+    price: 140.00,
+    status: "Mint"
+  },
+  // Adicione os outros itens (3, 4, 5, 6) aqui com os campos completos se desejar
 ];
 
-// 2. LISTA COMPLETA DE CATEGORIAS (Como você pediu)
+// 2. LISTA COMPLETA DE CATEGORIAS
 const allCategories = [
-    "Cartas Pokémon",
-    "Cartas Magic",
-    "Cartas Esportivas",
-    "Figuras de Ação",
-    "Miniaturas",
-    "Comics/HQs",
-    "Livros", // Corrigido de "Livros Raros"
-    "Moedas",
-    "Selos",
-    "Arte",
-    "Relógios",
-    "Vinhos",
-    "Discos de Vinil",
-    "Videogames",
-    "Outros"
+    "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
+    "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
+    "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
 ];
 
 
 // Componente Card da Coleção
-const CollectionCard = ({ item }) => (
-  <div className="collection-card rounded-border">
+// Atualizado para usar os novos nomes de campos (nome, condicao, valorEstimado)
+const CollectionCard = ({ item, onClick }) => (
+  <div className="collection-card rounded-border" onClick={onClick}>
     <div className="card-image-container">
-      <img src={item.img} alt={item.model} className="card-image" />
-      <span className={`card-status ${item.status.toLowerCase()}`}>{item.status}</span>
+      <img src={item.img} alt={item.nome} className="card-image" />
+      <span className={`card-status ${item.condicao.toLowerCase()}`}>{item.condicao}</span>
     </div>
     <div className="card-details">
-      <h4 className="card-model">{item.model}</h4>
-      <p className="card-brand">{item.brand}</p>
+      <h4 className="card-model">{item.nome}</h4>
+      <p className="card-brand">{item.marca}</p>
       <div className="card-footer">
-        <span className="card-price">R$ {item.price.toFixed(2)}</span>
-        <span className="card-status-label">{item.status}</span>
+        <span className="card-price">R$ {item.valorEstimado.toFixed(2)}</span>
+        <span className="card-status-label">{item.condicao}</span>
       </div>
     </div>
   </div>
@@ -57,106 +93,86 @@ const CollectionCard = ({ item }) => (
 function MyCollection() {
   const navigate = useNavigate();
 
-  // Estado para os filtros e busca
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
   const [sortBy, setSortBy] = useState('recent');
+
+  // *** FUNÇÃO PARA NAVEGAR PARA O DETALHE ***
+  const handleCardClick = (itemId) => {
+    navigate(`/item/${itemId}`); // Navega para a rota de detalhe com o ID
+  };
 
   // Lógica principal de Filtragem e Ordenação
   const filteredAndSortedItems = useMemo(() => {
     let currentItems = [...initialCollectionData];
 
-    // A. Filtrar por Termo de Busca
     if (searchTerm) {
       const lowerCaseSearch = searchTerm.toLowerCase();
       currentItems = currentItems.filter(item =>
-        item.model.toLowerCase().includes(lowerCaseSearch) ||
-        item.brand.toLowerCase().includes(lowerCaseSearch)
+        item.nome.toLowerCase().includes(lowerCaseSearch) || // MUDADO DE 'model' PARA 'nome'
+        item.marca.toLowerCase().includes(lowerCaseSearch)
       );
     }
 
-    // B. Filtrar por Categoria (Agora filtra pela categoria selecionada, se houver)
     if (category) {
-      currentItems = currentItems.filter(item => item.category === category);
+      currentItems = currentItems.filter(item => item.categoria === category); // MUDADO DE 'category' PARA 'categoria'
     }
 
-    // C. Ordenação
     switch (sortBy) {
       case 'value_desc':
-        currentItems.sort((a, b) => b.price - a.price);
+        currentItems.sort((a, b) => b.valorEstimado - a.valorEstimado); // MUDADO DE 'price'
         break;
       case 'value_asc':
-        currentItems.sort((a, b) => a.price - b.price);
+        currentItems.sort((a, b) => a.valorEstimado - b.valorEstimado); // MUDADO DE 'price'
         break;
       case 'name_asc':
-        currentItems.sort((a, b) => a.model.localeCompare(b.model));
+        currentItems.sort((a, b) => a.nome.localeCompare(b.nome)); // MUDADO DE 'model'
         break;
       case 'name_desc':
-        currentItems.sort((a, b) => b.model.localeCompare(a.model));
+        currentItems.sort((a, b) => b.nome.localeCompare(a.nome)); // MUDADO DE 'model'
         break;
       case 'recent':
       default:
-        // Mantém a ordem inicial (simulando "mais recente")
         break;
     }
 
     return currentItems;
   }, [searchTerm, category, sortBy]);
 
-  // Categorias para o filtro (usa a lista completa)
   const availableCategories = allCategories;
-
 
   return (
     <div className="my-collection-page">
-
-      {/* CONTAINER DO CABEÇALHO E DOS CARDS DE STATUS */}
       <div className="collection-page-header-container">
-
-        {/* A. CABEÇALHO (SÓ TÍTULO) */}
         <header className="collection-header">
           <div>
             <h2>Minha Coleção</h2>
           </div>
         </header>
-
-        {/* B. CARDS DE STATUS */}
         <div className="collection-status-cards-row">
-
-          {/* 1. CARD ITENS NA VISÃO (DINÂMICO) */}
           <div className="collection-status-card">
               <p>Itens na Visão</p>
               <h3>{filteredAndSortedItems.length}</h3>
           </div>
-
-          {/* 2. CARD TOTAL DE CATEGORIAS (FIXO) */}
           <div className="collection-status-card">
               <p>Total de Categorias</p>
-              {/* Usa o length da lista completa */}
               <h3>{availableCategories.length}</h3> 
           </div>
-
         </div>
-
       </div>
 
-      {/* 2. BARRA DE FERRAMENTAS/FILTROS (LAYOUT FINAL) */}
       <div className="collection-tools-bar">
-
-        {/* A. Busca */}
         <div className="search-filter-row-only-search">
           <div className="search-box">
             <MdSearch className="search-icon" />
             <input
               type="text"
-              placeholder="Buscar por nome ou descrição..."
+              placeholder="Buscar por nome, marca ou modelo..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
-
-        {/* B. Filtros Avançados e Botão Adicionar Item */}
         <div className="collection-advanced-filters">
           <div className="select-group">
             <label>Categoria</label>
@@ -166,7 +182,6 @@ function MyCollection() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Todas as categorias</option>
-              {/* MAPEANDO A LISTA COMPLETA DE CATEGORIAS */}
               {availableCategories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
@@ -186,8 +201,6 @@ function MyCollection() {
               <option value="name_desc">Nome (Z-A)</option>
             </select>
           </div>
-
-          {/* O BOTÃO AO LADO DOS FILTROS */}
           <button
               className="add-item-btn-small"
               onClick={() => navigate('/add-item')}
@@ -195,14 +208,16 @@ function MyCollection() {
             <MdAdd /> Adicionar Item
           </button>
         </div>
-
       </div>
 
-      {/* 3. Grid de Itens */}
       <div className="collection-grid">
         {filteredAndSortedItems && filteredAndSortedItems.length > 0 ? (
           filteredAndSortedItems.map((item) => (
-            <CollectionCard key={item.id} item={item} />
+            <CollectionCard
+              key={item.id}
+              item={item}
+              onClick={() => handleCardClick(item.id)} // Passa o ID do item
+            />
           ))
         ) : (
           <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#6b7280' }}>
