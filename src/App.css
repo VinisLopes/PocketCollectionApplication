@@ -1,4 +1,4 @@
-/* src/App.css - VERSÃO COMPLETA (REMOVIDO "JÁ SEI") */
+/* src/App.css - VERSÃO COMPLETA (COM ANIMAÇÕES DE PÁGINA, SIDEBAR ATIVA E ANIMAÇÕES DE MENSAGEM) */
 
 body {
   margin: 0;
@@ -184,13 +184,19 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* ATUALIZAÇÃO PARA ANIMAÇÃO */
 .main-content {
   margin-left: 260px; 
   width: calc(100% - 260px);
   padding: 32px;
   box-sizing: border-box;
   background-color: #eef2f6; 
+  position: relative; /* Necessário para o wrapper da animação */
+  overflow: hidden; /* Necessário para a animação */
 }
+/* FIM DA ATUALIZAÇÃO */
+
 .sidebar-logo {
   margin-bottom: 24px;
 }
@@ -215,6 +221,8 @@ body {
 .sidebar-menu li {
   margin-bottom: 8px;
 }
+
+/* ATUALIZAÇÃO PARA SIDEBAR ATIVA */
 .sidebar-menu a {
   display: flex;
   align-items: center;
@@ -226,10 +234,8 @@ body {
   font-size: 0.95rem;
   border-radius: 8px;
   transition: all 0.2s ease;
-  
-  /* Adicionado para link ativo */
-  padding-left: 20px; 
-  border-left: 4px solid transparent; 
+  padding-left: 20px; /* Padding padrão */
+  border-left: 4px solid transparent; /* Borda transparente */
 }
 .sidebar-menu a:hover {
   background-color: #f3f4f6;
@@ -239,9 +245,10 @@ body {
   background-color: #eef2ff;
   color: #4f46e5;
   font-weight: 700;
-  border-left: 4px solid #4f46e5;
-  padding-left: 16px; 
+  border-left: 4px solid #4f46e5; /* Borda colorida */
+  padding-left: 16px; /* Ajusta o padding para compensar a borda */
 }
+/* FIM DA ATUALIZAÇÃO */
 
 .sidebar-footer {
   border-top: 1px solid #e5e7eb;
@@ -765,8 +772,6 @@ body {
   color: #111827;
 }
 
-/* REGRA .card-status-label REMOVIDA */
-
 
 /* === PARTE 5: ESTILOS ATUALIZADOS PARA OS NOVOS MODAIS === */
 
@@ -948,9 +953,6 @@ body {
 .input-group.full-width {
     margin-bottom: 20px; 
 }
-
-/* REGRAS .with-checkbox e .side-checkbox REMOVIDAS DAQUI */
-
 .checkbox-group {
   display: flex;
   align-items: center;
@@ -1329,8 +1331,6 @@ input:checked + .slider:before {
     .form-row {
       grid-template-columns: 1fr; 
     }
-
-    /* REGRAS .with-checkbox e .side-checkbox REMOVIDAS DAQUI */
     
     .item-detail-grid {
       grid-template-columns: 1fr; 
@@ -1362,10 +1362,8 @@ input:checked + .slider:before {
   left: 0;
   top: 0;
 }
-.main-content {
-  position: relative;
-  overflow: hidden; 
-}
+/* .main-content já tem position: relative e overflow: hidden */
+
 .page-fade-enter {
   opacity: 0;
   transform: scale(0.98); 
