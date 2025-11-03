@@ -1,11 +1,10 @@
-// src/pages/ItemDetail.js - ATUALIZADO COM NAVEGAÇÃO DE EDIÇÃO
+// src/pages/ItemDetail.js - ATUALIZADO (Sem Informações de Compra)
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 
-// (Os dados simulados aqui são os mesmos que você já tem,
-//  baseados na atualização anterior)
+// --- DADOS SIMULADOS (sem campos de compra) ---
 const initialCollectionData = [
   { 
     id: 1, 
@@ -23,11 +22,6 @@ const initialCollectionData = [
     escala: "1:64",
     notasAdicionais: "Comprado na convenção.",
     visivelVitrine: true,
-    valorPago: 150.00,
-    valorEstimado: 170.00,
-    dataAquisicao: "2023-05-10",
-    localCompra: "Convenção Anual",
-    exibirValorPublicamente: true,
     img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg" 
   },
    { 
@@ -46,14 +40,10 @@ const initialCollectionData = [
     escala: "1:64",
     notasAdicionais: "",
     visivelVitrine: true,
-    valorPago: 140.00,
-    valorEstimado: 140.00,
-    dataAquisicao: "2023-01-15",
-    localCompra: "Loja Online",
-    exibirValorPublicamente: false,
     img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg"
   },
 ];
+// --- FIM DOS DADOS SIMULADOS ---
 
 function ItemDetail() {
   const navigate = useNavigate();
@@ -71,10 +61,8 @@ function ItemDetail() {
     e.stopPropagation(); 
   };
 
-  // ***** MUDANÇA AQUI *****
-  // Atualiza a função handleEdit para navegar para a nova rota
   const handleEdit = () => {
-    navigate(`/edit-item/${item.id}`); // Navega para a rota de edição
+    navigate(`/edit-item/${item.id}`); 
   };
 
   const handleDelete = () => {
@@ -122,6 +110,7 @@ function ItemDetail() {
                 {item.escala && <span className="detail-tag">{item.escala}</span>}
               </div>
 
+              {/* Seção Básica */}
               <div className="info-section">
                 <div className="info-group-row">
                   <div className="info-group">
@@ -149,6 +138,7 @@ function ItemDetail() {
                   </div>
               </div>
               
+              {/* Seção Descrição */}
               <div className="info-section">
                 <div className="info-group">
                   <span>Descrição</span>
@@ -164,33 +154,16 @@ function ItemDetail() {
                 </div>
               </div>
               
+              {/* === SEÇÃO INFORMAÇÕES DE COMPRA (REMOVIDA) === */}
+              
+              {/* Seção Visibilidade */}
               <div className="info-section">
-                 <div className="info-group-row">
-                    <div className="info-group">
-                      <span>Valor Pago</span>
-                      <p>R$ {item.valorPago ? item.valorPago.toFixed(2) : 'N/A'}</p>
-                    </div>
-                    <div className="info-group">
-                      <span>Valor Estimado</span>
-                      <p>R$ {item.valorEstimado ? item.valorEstimado.toFixed(2) : 'N/A'}</p>
-                    </div>
-                </div>
-                <div className="info-group-row">
-                    <div className="info-group">
-                      <span>Data de Aquisição</span>
-                      <p>{item.dataAquisicao || 'N/A'}</p>
-                    </div>
-                    <div className="info-group">
-                      <span>Local de Compra</span>
-                      <p>{item.localCompra || 'N/A'}</p>
-                    </div>
-                </div>
                  <div className="info-group">
                     <span>Visibilidade</span>
                     <p>{item.visivelVitrine ? 'Visível na vitrine pública' : 'Privado'}</p>
-                    <p>{item.exibirValorPublicamente ? 'Valor exibido publicamente' : 'Valor privado'}</p>
                   </div>
               </div>
+
             </div>
           </div>
         </div>

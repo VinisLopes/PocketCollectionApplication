@@ -1,10 +1,10 @@
-// src/pages/EditItem.js - ATUALIZADO (Campo Escala é um Select)
+// src/pages/EditItem.js - ATUALIZADO (Sem Informações de Compra)
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MdAddAPhoto, MdClose } from 'react-icons/md';
 
-// --- DADOS SIMULADOS ---
+// --- DADOS SIMULADOS (sem campos de compra) ---
 const initialCollectionData = [
   { 
     id: 1, 
@@ -19,14 +19,9 @@ const initialCollectionData = [
     analiseCondicao: "Embalagem em perfeito estado, sem vincos.",
     condicao: "Excelente",
     raridade: "Raro",
-    escala: "1:64", // Campo agora corresponde a um valor do select
+    escala: "1:64",
     notasAdicionais: "Comprado na convenção.",
     visivelVitrine: true,
-    valorPago: 150.00,
-    valorEstimado: 170.00,
-    dataAquisicao: "2023-05-10",
-    localCompra: "Convenção Anual",
-    exibirValorPublicamente: true,
     img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg" 
   },
    { 
@@ -42,34 +37,25 @@ const initialCollectionData = [
     analiseCondicao: "Perfeito.",
     condicao: "Mint",
     raridade: "Comum",
-    escala: "1:64", // Campo agora corresponde a um valor do select
+    escala: "1:64",
     notasAdicionais: "",
     visivelVitrine: true,
-    valorPago: 140.00,
-    valorEstimado: 140.00,
-    dataAquisicao: "2023-01-15",
-    localCompra: "Loja Online",
-    exibirValorPublicamente: false,
     img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg"
   },
-  // (O restante dos seus dados simulados)
 ];
 // --- FIM DOS DADOS SIMULADOS ---
 
-// Lista Completa de Categorias
 const allCategories = [
     "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
     "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
     "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
 ];
 
-// *** LISTA DE ESCALAS ADICIONADA ***
 const allScales = [
     "1:12", "1:18", "1:24", "1:32", "1:36", "1:43", "1:50", 
     "1:55", "1:60", "1:64", "1:72", "1:76", "1:87", "1:100", "Outra"
 ];
 
-// Componente simples para o "Switch/Toggle"
 const ToggleSwitch = ({ label, name, checked, onChange }) => (
   <label className="switch-toggle-group">
     {label}
@@ -237,7 +223,6 @@ function EditItem() {
                 </div>
               </div>
 
-              {/* *** CAMPO DE ESCALA ATUALIZADO *** */}
               <div className="input-group full-width">
                 <label>Escala (se aplicável)</label>
                 <select name="escala" value={formData.escala} onChange={handleChange}>
@@ -261,37 +246,7 @@ function EditItem() {
               />
             </div>
 
-            <div className="form-section">
-              <h4>Informações de Compra (Opcional)</h4>
-              <div className="form-row">
-                <div className="input-group">
-                  <label>Valor Pago</label>
-                  <input type="number" step="0.01" name="valorPago" value={formData.valorPago} onChange={handleChange} />
-                </div>
-                <div className="input-group">
-                  <label>Valor Estimado (Mercado)</label>
-                  <input type="number" step="0.01" name="valorEstimado" value={formData.valorEstimado} onChange={handleChange} />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="input-group">
-                  <label>Data de Aquisição</label>
-                  <input type="date" name="dataAquisicao" value={formData.dataAquisicao} onChange={handleChange} />
-                </div>
-                <div className="input-group">
-                  <label>Local de Compra</label>
-                  <input type="text" name="localCompra" value={formData.localCompra} onChange={handleChange} />
-                </div>
-              </div>
-
-              <ToggleSwitch 
-                label="Exibir valor publicamente"
-                name="exibirValorPublicamente"
-                checked={formData.exibirValorPublicamente}
-                onChange={handleChange}
-              />
-              <p className="form-section-subtitle" style={{marginTop: '8px'}}>Quando ativado, o valor será visível para outros usuários</p>
-            </div>
+            {/* === SEÇÃO INFORMAÇÕES DE COMPRA (REMOVIDA) === */}
           
           </div> 
 

@@ -1,23 +1,20 @@
-// src/pages/AddItem.js - VERSÃO COMPLETA E ATUALIZADA
+// src/pages/AddItem.js - ATUALIZADO (Sem Informações de Compra)
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdAddAPhoto, MdClose } from 'react-icons/md';
 
-// Lista Completa de Categorias
 const allCategories = [
     "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
     "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
     "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
 ];
 
-// Lista de Escalas
 const allScales = [
     "1:12", "1:18", "1:24", "1:32", "1:36", "1:43", "1:50", 
     "1:55", "1:60", "1:64", "1:72", "1:76", "1:87", "1:100", "Outra"
 ];
 
-// Componente simples para o "Switch/Toggle"
 const ToggleSwitch = ({ label, name, checked, onChange }) => (
   <label className="switch-toggle-group">
     {label}
@@ -30,7 +27,7 @@ const ToggleSwitch = ({ label, name, checked, onChange }) => (
 
 function AddItem() {
   const navigate = useNavigate();
-  // Estado para o formulário
+  // Estado do formulário SEM os campos de compra
   const [formData, setFormData] = useState({
     nome: '',
     categoria: '',
@@ -46,11 +43,7 @@ function AddItem() {
     escala: '', 
     notasAdicionais: '', 
     visivelVitrine: false, 
-    valorPago: '', 
-    valorEstimado: '', 
-    dataAquisicao: '', 
-    localCompra: '', 
-    exibirValorPublicamente: false, 
+    // Campos de compra removidos
   });
 
   const handleChange = (e) => {
@@ -186,7 +179,6 @@ function AddItem() {
                 </div>
               </div>
 
-              {/* *** CAMPO DE ESCALA ATUALIZADO *** */}
               <div className="input-group full-width">
                 <label>Escala (se aplicável)</label>
                 <select name="escala" value={formData.escala} onChange={handleChange}>
@@ -210,38 +202,7 @@ function AddItem() {
               />
             </div>
 
-            {/* === SEÇÃO INFORMAÇÕES DE COMPRA === */}
-            <div className="form-section">
-              <h4>Informações de Compra (Opcional)</h4>
-              <div className="form-row">
-                <div className="input-group">
-                  <label>Valor Pago</label>
-                  <input type="number" step="0.01" name="valorPago" value={formData.valorPago} onChange={handleChange} placeholder="0.00" />
-                </div>
-                <div className="input-group">
-                  <label>Valor Estimado (Mercado)</label>
-                  <input type="number" step="0.01" name="valorEstimado" value={formData.valorEstimado} onChange={handleChange} placeholder="0.00" />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="input-group">
-                  <label>Data de Aquisição</label>
-                  <input type="date" name="dataAquisicao" value={formData.dataAquisicao} onChange={handleChange} />
-                </div>
-                <div className="input-group">
-                  <label>Local de Compra</label>
-                  <input type="text" name="localCompra" value={formData.localCompra} onChange={handleChange} />
-                </div>
-              </div>
-
-              <ToggleSwitch 
-                label="Exibir valor publicamente"
-                name="exibirValorPublicamente"
-                checked={formData.exibirValorPublicamente}
-                onChange={handleChange}
-              />
-              <p className="form-section-subtitle" style={{marginTop: '8px'}}>Quando ativado, o valor será visível para outros usuários</p>
-            </div>
+            {/* === SEÇÃO INFORMAÇÕES DE COMPRA (REMOVIDA) === */}
           
           </div> 
 
