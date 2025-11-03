@@ -1,12 +1,10 @@
-// src/pages/MyCollection.js - ATUALIZADO COM NOVOS CAMPOS NOS DADOS SIMULADOS
+// src/pages/MyCollection.js - ATUALIZADO (TAG DE RARIDADE)
 
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdSearch, MdAdd } from 'react-icons/md';
-// CustomSelect não está sendo usado aqui, mas pode ser adicionado de volta se necessário
-// import CustomSelect from '../components/CustomSelect';
 
-// 1. DADOS SIMULADOS ATUALIZADOS (Devem ser iguais aos do ItemDetail.js)
+// 1. DADOS SIMULADOS (Os mesmos de antes, já incluem a raridade)
 const initialCollectionData = [
   { 
     id: 1, 
@@ -19,20 +17,19 @@ const initialCollectionData = [
     serie: "Hot Wheels Premium",
     descricao: "Modelo do furgão Mystery Machine do desenho Scooby-Doo. Raro de encontrar.",
     analiseCondicao: "Embalagem em perfeito estado, sem vincos.",
-    condicao: "Excelente", // Usado para o status no card
-    raridade: "Raro",
+    condicao: "Excelente",
+    raridade: "Raro", // <-- CAMPO USADO NA NOVA TAG
     escala: "1:64",
     notasAdicionais: "Comprado na convenção.",
     visivelVitrine: true,
     valorPago: 150.00,
-    valorEstimado: 170.00, // Usado para o preço no card
+    valorEstimado: 170.00,
     dataAquisicao: "2023-05-10",
     localCompra: "Convenção Anual",
     exibirValorPublicamente: true,
     img: "https://m.media-amazon.com/images/I/71Yf-iRzNPL._AC_SL1500_.jpg",
-    // Campos antigos que o card usa:
-    price: 170.00, // Vamos manter 'price' para o card, apontando para o valorEstimado
-    status: "Excelente" // Vamos manter 'status' para o card, apontando para condicao
+    price: 170.00, 
+    status: "Excelente" 
   },
    { 
     id: 2, 
@@ -46,7 +43,7 @@ const initialCollectionData = [
     descricao: "Miniatura Mini GT com pintura de corrida Imai Racing.",
     analiseCondicao: "Perfeito.",
     condicao: "Mint",
-    raridade: "Comum",
+    raridade: "Comum", // <-- CAMPO USADO NA NOVA TAG
     escala: "1:64",
     notasAdicionais: "",
     visivelVitrine: true,
@@ -59,7 +56,7 @@ const initialCollectionData = [
     price: 140.00,
     status: "Mint"
   },
-  // Adicione os outros itens (3, 4, 5, 6) aqui com os campos completos se desejar
+  // (O restante dos seus dados simulados estará aqui)
 ];
 
 // 2. LISTA COMPLETA DE CATEGORIAS
@@ -70,24 +67,37 @@ const allCategories = [
 ];
 
 
+// ==========================================================
+// *** ALTERAÇÃO PRINCIPAL AQUI ***
 // Componente Card da Coleção
-// Atualizado para usar os novos nomes de campos (nome, condicao, valorEstimado)
+// ==========================================================
 const CollectionCard = ({ item, onClick }) => (
   <div className="collection-card rounded-border" onClick={onClick}>
     <div className="card-image-container">
       <img src={item.img} alt={item.nome} className="card-image" />
-      <span className={`card-status ${item.condicao.toLowerCase()}`}>{item.condicao}</span>
+      
+      {/* 1. Tag agora mostra a RARIDADE (item.raridade) */}
+      {/* 2. Tem uma nova classe 'card-rarity-tag' para posicionamento (inferior esquerdo) */}
+      {/* 3. Classe de cor é baseada na raridade (ex: .raro, .comum) */}
+      {item.raridade && ( // Só mostra a tag se a raridade estiver definida
+        <span className={`card-rarity-tag rarity-${item.raridade.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}>
+          {item.raridade}
+        </span>
+      )}
     </div>
     <div className="card-details">
       <h4 className="card-model">{item.nome}</h4>
       <p className="card-brand">{item.marca}</p>
       <div className="card-footer">
         <span className="card-price">R$ {item.valorEstimado.toFixed(2)}</span>
-        <span className="card-status-label">{item.condicao}</span>
+        {/* 3. Tag de Status (item.condicao) foi REMOVIDA do rodapé */}
       </div>
     </div>
   </div>
 );
+// ==========================================================
+// *** FIM DA ALTERAÇÃO ***
+// ==========================================================
 
 
 function MyCollection() {
@@ -97,39 +107,37 @@ function MyCollection() {
   const [category, setCategory] = useState('');
   const [sortBy, setSortBy] = useState('recent');
 
-  // *** FUNÇÃO PARA NAVEGAR PARA O DETALHE ***
   const handleCardClick = (itemId) => {
-    navigate(`/item/${itemId}`); // Navega para a rota de detalhe com o ID
+    navigate(`/item/${itemId}`); 
   };
 
-  // Lógica principal de Filtragem e Ordenação
   const filteredAndSortedItems = useMemo(() => {
     let currentItems = [...initialCollectionData];
 
     if (searchTerm) {
       const lowerCaseSearch = searchTerm.toLowerCase();
       currentItems = currentItems.filter(item =>
-        item.nome.toLowerCase().includes(lowerCaseSearch) || // MUDADO DE 'model' PARA 'nome'
+        item.nome.toLowerCase().includes(lowerCaseSearch) || 
         item.marca.toLowerCase().includes(lowerCaseSearch)
       );
     }
 
     if (category) {
-      currentItems = currentItems.filter(item => item.categoria === category); // MUDADO DE 'category' PARA 'categoria'
+      currentItems = currentItems.filter(item => item.categoria === category); 
     }
 
     switch (sortBy) {
       case 'value_desc':
-        currentItems.sort((a, b) => b.valorEstimado - a.valorEstimado); // MUDADO DE 'price'
+        currentItems.sort((a, b) => b.valorEstimado - a.valorEstimado); 
         break;
       case 'value_asc':
-        currentItems.sort((a, b) => a.valorEstimado - b.valorEstimado); // MUDADO DE 'price'
+        currentItems.sort((a, b) => a.valorEstimado - b.valorEstimado); 
         break;
       case 'name_asc':
-        currentItems.sort((a, b) => a.nome.localeCompare(b.nome)); // MUDADO DE 'model'
+        currentItems.sort((a, b) => a.nome.localeCompare(b.nome)); 
         break;
       case 'name_desc':
-        currentItems.sort((a, b) => b.nome.localeCompare(a.nome)); // MUDADO DE 'model'
+        currentItems.sort((a, b) => b.nome.localeCompare(a.nome)); 
         break;
       case 'recent':
       default:
@@ -216,7 +224,7 @@ function MyCollection() {
             <CollectionCard
               key={item.id}
               item={item}
-              onClick={() => handleCardClick(item.id)} // Passa o ID do item
+              onClick={() => handleCardClick(item.id)} 
             />
           ))
         ) : (

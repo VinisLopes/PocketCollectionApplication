@@ -1,4 +1,4 @@
-// src/pages/AddItem.js - CORRIGIDO O FOOTER STICKY
+// src/pages/AddItem.js - VERSÃO COMPLETA E ATUALIZADA
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,12 @@ const allCategories = [
     "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
     "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
     "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
+];
+
+// Lista de Escalas
+const allScales = [
+    "1:12", "1:18", "1:24", "1:32", "1:36", "1:43", "1:50", 
+    "1:55", "1:60", "1:64", "1:72", "1:76", "1:87", "1:100", "Outra"
 ];
 
 // Componente simples para o "Switch/Toggle"
@@ -24,7 +30,7 @@ const ToggleSwitch = ({ label, name, checked, onChange }) => (
 
 function AddItem() {
   const navigate = useNavigate();
-  // Estado para o formulário com TODOS os novos campos
+  // Estado para o formulário
   const [formData, setFormData] = useState({
     nome: '',
     categoria: '',
@@ -81,11 +87,8 @@ function AddItem() {
           </button>
         </header>
 
-        {/* =================================================================== */}
-        {/* CORREÇÃO AQUI: <form> agora envolve o content e o footer */}
         <form onSubmit={handleSubmit} className="modal-form-wrapper">
           
-          {/* O CONTEÚDO QUE ROLA */}
           <div className="modal-form-content">
 
             {/* SEÇÃO DE IMAGENS */}
@@ -96,19 +99,18 @@ function AddItem() {
               </button>
             </div>
 
-            {/* SEÇÃO INFORMAÇÕES BÁSICAS */}
+            {/* === SEÇÃO INFORMAÇÕES BÁSICAS === */}
             <div className="form-section">
               <h4>Informações Básicas</h4>
-              <p className="form-section-subtitle">Marque os campos que você já conhece. A IA preencherá os demais.</p>
+              <p className="form-section-subtitle">Preencha os dados do seu item.</p>
               
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Nome do Item *</label>
                 <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Ex: Hot Wheels Elite 64 Porsche 911" required />
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
               </div>
 
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Categoria *</label>
                   <select name="categoria" value={formData.categoria} onChange={handleChange} required>
                     <option value="">Selecione...</option>
@@ -116,59 +118,51 @@ function AddItem() {
                        <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Marca</label>
                   <input type="text" name="marca" value={formData.marca} onChange={handleChange} placeholder="Ex: Hot Wheels, Mattel, Hasbro..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
               </div>
 
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Modelo</label>
                   <input type="text" name="modelo" value={formData.modelo} onChange={handleChange} placeholder="Ex: Porsche 911 GT3, Toyota Supra..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Fabricante</label>
                   <input type="text" name="fabricante" value={formData.fabricante} onChange={handleChange} placeholder="Ex: Mattel Inc., Hasbro..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
               </div>
 
                <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Ano</label>
                   <input type="text" name="ano" value={formData.ano} onChange={handleChange} placeholder="Ex: 2023" />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Série/Coleção</label>
                   <input type="text" name="serie" value={formData.serie} onChange={handleChange} placeholder="Ex: Fast & Furious, Premium..." />
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
               </div>
 
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Descrição</label>
-                <textarea name="descricao" rows="3" value={formData.descricao} onChange={handleChange} placeholder="A IA pode preencher isso automaticamente..."></textarea>
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                <textarea name="descricao" rows="3" value={formData.descricao} onChange={handleChange} placeholder="Descrição, detalhes, etc..."></textarea>
               </div>
               
-              <div className="input-group full-width with-checkbox">
+              <div className="input-group full-width">
                 <label>Análise da Condição Física</label>
-                <textarea name="analiseCondicao" rows="3" value={formData.analiseCondicao} onChange={handleChange} placeholder="A IA vai analisar embalagem, riscos, desgaste e outros detalhes..."></textarea>
-                <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
+                <textarea name="analiseCondicao" rows="3" value={formData.analiseCondicao} onChange={handleChange} placeholder="Detalhes da embalagem, riscos, etc..."></textarea>
               </div>
             </div>
 
-            {/* SEÇÃO DETALHES DO ITEM */}
+            {/* === SEÇÃO DETALHES DO ITEM === */}
             <div className="form-section">
               <h4>Detalhes do Item</h4>
               <div className="form-row">
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Condição</label>
                   <select name="condicao" value={formData.condicao} onChange={handleChange}>
                     <option value="">Selecione...</option>
@@ -178,9 +172,8 @@ function AddItem() {
                     <option value="aceitavel">Aceitável</option>
                     <option value="loose">Loose</option>
                   </select>
-                  <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
-                <div className="input-group with-checkbox">
+                <div className="input-group">
                   <label>Raridade</label>
                   <select name="raridade" value={formData.raridade} onChange={handleChange}>
                     <option value="">Selecione...</option>
@@ -190,13 +183,18 @@ function AddItem() {
                     <option value="super">Super T-Hunt</option>
                     <option value="ultra">Ultra Raro</option>
                   </select>
-                   <label className="side-checkbox"><input type="checkbox" disabled /> Já sei</label>
                 </div>
               </div>
 
+              {/* *** CAMPO DE ESCALA ATUALIZADO *** */}
               <div className="input-group full-width">
                 <label>Escala (se aplicável)</label>
-                <input type="text" name="escala" value={formData.escala} onChange={handleChange} placeholder="Ex: 1:64, 1:18, 1:43..." />
+                <select name="escala" value={formData.escala} onChange={handleChange}>
+                  <option value="">Selecione a escala...</option>
+                  {allScales.map(scale => (
+                    <option key={scale} value={scale}>{scale}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="input-group full-width">
@@ -212,7 +210,7 @@ function AddItem() {
               />
             </div>
 
-            {/* SEÇÃO INFORMAÇÕES DE COMPRA */}
+            {/* === SEÇÃO INFORMAÇÕES DE COMPRA === */}
             <div className="form-section">
               <h4>Informações de Compra (Opcional)</h4>
               <div className="form-row">
@@ -245,9 +243,8 @@ function AddItem() {
               <p className="form-section-subtitle" style={{marginTop: '8px'}}>Quando ativado, o valor será visível para outros usuários</p>
             </div>
           
-          </div> {/* FIM DO .modal-form-content */}
+          </div> 
 
-          {/* RODAPÉ STICKY (AGORA FORA DO CONTENT) */}
           <footer className="modal-footer">
             <button type="button" className="btn-cancel" onClick={() => navigate('/my-collection')}>
               Cancelar
@@ -257,9 +254,7 @@ function AddItem() {
             </button>
           </footer>
           
-        </form> {/* FIM DO .modal-form-wrapper */}
-        {/* =================================================================== */}
-
+        </form>
       </div>
     </div>
   );

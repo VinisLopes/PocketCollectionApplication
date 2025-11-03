@@ -1,4 +1,4 @@
-// src/pages/EditItem.js - CORRIGIDO O FOOTER STICKY
+// src/pages/EditItem.js - ATUALIZADO (Campo Escala é um Select)
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,7 +19,7 @@ const initialCollectionData = [
     analiseCondicao: "Embalagem em perfeito estado, sem vincos.",
     condicao: "Excelente",
     raridade: "Raro",
-    escala: "1:64",
+    escala: "1:64", // Campo agora corresponde a um valor do select
     notasAdicionais: "Comprado na convenção.",
     visivelVitrine: true,
     valorPago: 150.00,
@@ -42,7 +42,7 @@ const initialCollectionData = [
     analiseCondicao: "Perfeito.",
     condicao: "Mint",
     raridade: "Comum",
-    escala: "1:64",
+    escala: "1:64", // Campo agora corresponde a um valor do select
     notasAdicionais: "",
     visivelVitrine: true,
     valorPago: 140.00,
@@ -52,6 +52,7 @@ const initialCollectionData = [
     exibirValorPublicamente: false,
     img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg"
   },
+  // (O restante dos seus dados simulados)
 ];
 // --- FIM DOS DADOS SIMULADOS ---
 
@@ -60,6 +61,12 @@ const allCategories = [
     "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
     "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
     "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
+];
+
+// *** LISTA DE ESCALAS ADICIONADA ***
+const allScales = [
+    "1:12", "1:18", "1:24", "1:32", "1:36", "1:43", "1:50", 
+    "1:55", "1:60", "1:64", "1:72", "1:76", "1:87", "1:100", "Outra"
 ];
 
 // Componente simples para o "Switch/Toggle"
@@ -135,11 +142,7 @@ function EditItem() {
           </button>
         </header>
 
-        {/* =================================================================== */}
-        {/* CORREÇÃO AQUI: <form> agora envolve o content e o footer */}
         <form onSubmit={handleSubmit} className="modal-form-wrapper">
-
-          {/* O CONTEÚDO QUE ROLA */}
           <div className="modal-form-content">
 
             <div className="form-section modal-images-section">
@@ -234,9 +237,15 @@ function EditItem() {
                 </div>
               </div>
 
+              {/* *** CAMPO DE ESCALA ATUALIZADO *** */}
               <div className="input-group full-width">
                 <label>Escala (se aplicável)</label>
-                <input type="text" name="escala" value={formData.escala} onChange={handleChange} />
+                <select name="escala" value={formData.escala} onChange={handleChange}>
+                  <option value="">Selecione a escala...</option>
+                  {allScales.map(scale => (
+                    <option key={scale} value={scale}>{scale}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="input-group full-width">
@@ -284,9 +293,8 @@ function EditItem() {
               <p className="form-section-subtitle" style={{marginTop: '8px'}}>Quando ativado, o valor será visível para outros usuários</p>
             </div>
           
-          </div> {/* FIM DO .modal-form-content */}
+          </div> 
 
-          {/* RODAPÉ STICKY (AGORA FORA DO CONTENT) */}
           <footer className="modal-footer">
             <button type="button" className="btn-cancel" onClick={() => navigate(`/item/${itemId}`)}>
               Cancelar
@@ -295,10 +303,8 @@ function EditItem() {
               Salvar Alterações
             </button>
           </footer>
-
-        </form> {/* FIM DO .modal-form-wrapper */}
-        {/* =================================================================== */}
-
+          
+        </form> 
       </div>
     </div>
   );
