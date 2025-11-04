@@ -128,7 +128,6 @@ function AddWithIA() {
               <button type="button" className="ia-upload-btn" onClick={handleImageSelect}>
                 Enviar Imagem
               </button>
-              <p>e busque</p>
               <button 
                 type="button" 
                 className="ia-search-btn" 
