@@ -1,4 +1,4 @@
-// src/pages/ItemDetail.js - ATUALIZADO (Sem Informações de Compra)
+// src/pages/ItemDetail.js - ATUALIZADO (para voltar para a tela anterior)
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -39,9 +39,28 @@ const initialCollectionData = [
     raridade: "Comum",
     escala: "1:64",
     notasAdicionais: "",
-    visivelVitrine: true,
+    visivelVitrine: false, // <-- Este item não aparecerá na vitrine
     img: "https://m.media-amazon.com/images/I/61r-aG-gLKL._AC_SL1500_.jpg"
   },
+  { 
+    id: 3, 
+    nome: "Pokemon Card - Charizard VMAX",
+    categoria: "Cartas Pokémon",
+    marca: "Nintendo",
+    modelo: "Charizard VMAX",
+    fabricante: "Nintendo",
+    ano: "2020",
+    serie: "Shining Fates",
+    descricao: "Carta ultra-rara do Charizard VMAX.",
+    analiseCondicao: "Perfeito, guardado no sleeve.",
+    condicao: "Mint",
+    raridade: "Ultra Raro",
+    escala: "N/A",
+    notasAdicionais: "Meu card favorito.",
+    visivelVitrine: true, // <-- Este item aparecerá na vitrine
+    img: "https://images.pokemontcg.io/swsh4/136_hires.png",
+  },
+  // (O restante dos seus dados simulados)
 ];
 // --- FIM DOS DADOS SIMULADOS ---
 
@@ -53,8 +72,10 @@ function ItemDetail() {
     (i) => i.id === parseInt(itemId)
   );
 
+  // ***** ALTERAÇÃO PRINCIPAL AQUI *****
   const handleClose = () => {
-    navigate('/my-collection');
+    // navigate('/my-collection'); // <-- ANTES
+    navigate(-1); // <-- AGORA (Volta para a página anterior)
   };
 
   const handleModalClick = (e) => {
@@ -75,8 +96,16 @@ function ItemDetail() {
   if (!item) {
     return (
       <div className="add-item-modal-overlay" onClick={handleClose}>
-        <div className="item-detail-modal" onClick={handleModalClick}>
-          <p>Item não encontrado.</p>
+        <div className="add-item-modal item-detail-modal-view" onClick={handleModalClick}>
+          <header className="modal-header">
+            <h3>Erro</h3>
+            <button className="close-btn" onClick={handleClose}>
+              <MdClose size={24} />
+            </button>
+          </header>
+          <div className="modal-form-content">
+            <p>Item não encontrado.</p>
+          </div>
         </div>
       </div>
     );
@@ -153,8 +182,6 @@ function ItemDetail() {
                   <p>{item.analiseCondicao || 'N/A'}</p>
                 </div>
               </div>
-              
-              {/* === SEÇÃO INFORMAÇÕES DE COMPRA (REMOVIDA) === */}
               
               {/* Seção Visibilidade */}
               <div className="info-section">

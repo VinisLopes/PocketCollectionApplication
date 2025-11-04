@@ -1,4 +1,4 @@
-/* src/App.css - VERSÃO COMPLETA (Layout AddWithIA Integrado) */
+/* src/App.css - VERSÃO COMPLETA (COM BOTÃO DE COMPARTILHAR VITRINE) */
 
 body {
   margin: 0;
@@ -1314,6 +1314,24 @@ input:checked + .slider:before {
   .add-ia-container {
     grid-template-columns: 1fr; 
   }
+  .ia-form-column {
+     border-top: 1px solid #e5e7eb;
+     margin-top: 24px;
+     padding-top: 24px;
+  }
+  
+  /* Layout 2 Colunas Vitrine passa para 1 coluna */
+  .vitrine-profile-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .vitrine-user-details {
+    text-align: center;
+  }
+  .vitrine-button-group {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1603,42 +1621,31 @@ input:checked + .slider:before {
 /* === NOVOS ESTILOS (Página AddWithIA 2 Colunas) === */
 /* ================================================ */
 
-/* O .dashboard-card quando é o .add-ia-container não deve ter padding interno */
 .add-ia-container.dashboard-card {
   padding: 0; 
   display: grid;
-  grid-template-columns: 1fr; /* Padrão 1 coluna (mobile) */
-  gap: 0; /* Sem gap, a borda cuidará disso */
+  grid-template-columns: 1fr; 
+  gap: 0; 
 }
-
-/* Coluna da Esquerda (Upload) */
 .ia-image-column {
   position: sticky;
   top: 24px; 
   align-self: start;
-  padding: 24px; /* Padding interno para o conteúdo */
+  padding: 24px; 
 }
-
-/* Coluna da Direita (Formulário) */
 .ia-form-column {
   padding: 24px;
 }
-
-/* Footer do formulário da IA (remove fundo e borda) */
 .ia-form-footer {
-  background-color: transparent;
-  border-top: none;
-  padding: 16px 0 0 0; /* Só padding em cima */
+  background-color: transparent !important;
+  border-top: none !important;
+  padding: 16px 0 0 0 !important; 
 }
-
-/* --- Estilos para o conteúdo do Upload Card --- */
 .ia-upload-card-content {
-  /* Não é mais um card, apenas um container de conteúdo */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .ia-upload-content {
   display: flex;
   flex-direction: column;
@@ -1647,7 +1654,6 @@ input:checked + .slider:before {
   width: 100%;
   max-width: 400px;
 }
-
 .ia-image-placeholder {
   width: 100%;
   height: 250px;
@@ -1662,7 +1668,6 @@ input:checked + .slider:before {
   font-weight: 500;
   cursor: pointer;
 }
-
 .ia-image-preview {
   width: 100%;
   max-height: 300px;
@@ -1670,7 +1675,6 @@ input:checked + .slider:before {
   object-fit: contain;
   border: 1px solid #e5e7eb;
 }
-
 .ia-upload-btn {
   padding: 12px 24px;
   font-size: 1rem;
@@ -1686,13 +1690,11 @@ input:checked + .slider:before {
 .ia-upload-btn:hover {
   background-color: #f9fafb;
 }
-
 .ia-upload-content p {
   font-weight: 600;
   color: #6b7280;
   margin: 0;
 }
-
 .ia-search-btn {
   background-color: #4f46e5; 
   color: white;
@@ -1717,34 +1719,29 @@ input:checked + .slider:before {
   cursor: not-allowed;
 }
 
-/* Em telas maiores, ativa as 2 colunas */
 @media (min-width: 992px) { 
   .add-ia-container.dashboard-card {
-    grid-template-columns: 0.8fr 1.2fr; /* 40% / 60% */
+    grid-template-columns: 0.8fr 1.2fr; 
   }
   .ia-image-column {
-    /* Adiciona a linha divisória à direita */
     border-right: 1px solid #e5e7eb;
   }
-  /* Remove a borda no mobile */
   .ia-form-column {
      border-top: 1px solid #e5e7eb;
   }
 }
 @media (min-width: 992px) {
   .ia-form-column {
-    border-top: none; /* Remove a borda no desktop */
+    border-top: none; 
   }
 }
 
-
-/* --- Card de Fotos Selecionadas (NOVO) --- */
 .selected-photos-card {
   margin-top: 24px; 
-  border: 1px solid #e5e7eb; /* Adiciona borda */
-  border-radius: 12px; /* Adiciona borda arredondada */
-  padding: 24px; /* Adiciona padding interno */
-  background-color: #f9fafb; /* Fundo levemente diferente */
+  border: 1px solid #e5e7eb; 
+  border-radius: 12px; 
+  padding: 24px; 
+  background-color: #ffffff; 
 }
 .selected-photos-header {
   display: flex;
@@ -1777,6 +1774,7 @@ input:checked + .slider:before {
   gap: 12px;
   max-height: 300px; 
   overflow-y: auto;
+  padding-right: 10px; 
 }
 .selected-photo-item {
   position: relative;
@@ -1793,4 +1791,224 @@ input:checked + .slider:before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ================================================= */
+/* === NOVOS ESTILOS (Página Minha Vitrine Limpa) === */
+/* ================================================= */
+
+.vitrine-header-container {
+  margin-bottom: 32px;
+  overflow: hidden; 
+}
+
+.vitrine-profile-top {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 16px;
+}
+.vitrine-profile-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.vitrine-profile-pic {
+  width: 60px; 
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+.vitrine-user-details {
+  text-align: center; 
+}
+.vitrine-user-details h3 {
+  font-size: 1.5rem; 
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+.vitrine-user-details span {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* NOVO: Grupo de Botões */
+.vitrine-button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.vitrine-edit-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vitrine-edit-btn:hover {
+  background-color: #f9fafb;
+}
+
+/* NOVO: Botão de Compartilhar */
+.vitrine-share-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #4f46e5; /* Cor primária */
+  border: 1px solid #4f46e5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vitrine-share-btn:hover {
+  background-color: #4338ca;
+}
+
+
+.vitrine-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 20px 0; 
+}
+.vitrine-profile-bottom {
+  /* O padding já vem do card */
+}
+.vitrine-stats {
+  display: flex;
+  justify-content: space-around; 
+  gap: 16px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-item strong {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+  display: block;
+}
+.stat-item span {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+.vitrine-grid-container h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 24px;
+}
+
+/* Ajustes para Desktop */
+@media (min-width: 768px) {
+  .vitrine-profile-top {
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+  }
+  .vitrine-user-details {
+    text-align: left; 
+  }
+  .vitrine-button-group {
+    margin-left: auto; /* Empurra para a direita */
+  }
+}
+
+/* ================================================= */
+/* === NOVOS ESTILOS (Vitrine Social na Vitrine) === */
+/* ================================================= */
+
+.vitrine-social-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e5e7eb;
+  padding: 24px; 
+  margin-bottom: 32px; 
+}
+.vitrine-search-bar-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px; 
+  align-items: center; 
+}
+.social-search-box {
+  flex-grow: 1; 
+  max-width: none; 
+}
+.social-search-box input {
+  padding-left: 40px; 
+  background-color: #f9fafb; 
+  border-color: #e5e7eb;
+}
+.social-search-box input:focus {
+  border-color: #4f46e5;
+  background-color: #ffffff;
+  outline: none;
+}
+.vitrine-social-tabs {
+  display: flex;
+  justify-content: space-around; 
+  gap: 10px; 
+}
+.social-tab-btn {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b7280; 
+  background-color: #f3f4f6; 
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap; 
+}
+.social-tab-btn:hover {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+.social-tab-btn.active {
+  background-color: #4f46e5; 
+  color: white; 
+  border-color: #4f46e5;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2); 
+}
+.social-tab-btn.active .tab-icon {
+  filter: brightness(2); 
+}
+.tab-icon {
+  font-size: 1.1rem; 
+}
+@media (max-width: 600px) {
+  .vitrine-search-bar-container {
+    flex-direction: column; 
+    gap: 12px;
+  }
+  .vitrine-social-tabs {
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+  .social-tab-btn {
+    flex: none; 
+    width: auto; 
+    padding: 10px 14px; 
+    font-size: 0.9rem;
+  }
 }
