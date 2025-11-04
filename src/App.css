@@ -1,4 +1,4 @@
-/* src/App.css - VERSÃO COMPLETA (COM "JÁ SEI" E ANIMAÇÕES) */
+/* src/App.css - VERSÃO COMPLETA (Layout AddWithIA Integrado) */
 
 body {
   margin: 0;
@@ -1603,34 +1603,37 @@ input:checked + .slider:before {
 /* === NOVOS ESTILOS (Página AddWithIA 2 Colunas) === */
 /* ================================================ */
 
-.add-ia-container {
+/* O .dashboard-card quando é o .add-ia-container não deve ter padding interno */
+.add-ia-container.dashboard-card {
+  padding: 0; 
   display: grid;
   grid-template-columns: 1fr; /* Padrão 1 coluna (mobile) */
-  gap: 24px;
+  gap: 0; /* Sem gap, a borda cuidará disso */
 }
 
 /* Coluna da Esquerda (Upload) */
 .ia-image-column {
   position: sticky;
   top: 24px; 
-  align-self: start; 
+  align-self: start;
+  padding: 24px; /* Padding interno para o conteúdo */
 }
 
 /* Coluna da Direita (Formulário) */
 .ia-form-column {
-  /* O formulário simplesmente rola normal */
+  padding: 24px;
 }
 
-/* --- Estilos para Etapa 1 (Upload Card) --- */
-.ia-upload-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+/* Footer do formulário da IA (remove fundo e borda) */
+.ia-form-footer {
+  background-color: transparent;
+  border-top: none;
+  padding: 16px 0 0 0; /* Só padding em cima */
 }
-/* Se for um modal, aplicamos estilos diferentes */
-.add-item-modal .ia-upload-card-modal {
-  padding: 20px 0; 
+
+/* --- Estilos para o conteúdo do Upload Card --- */
+.ia-upload-card-content {
+  /* Não é mais um card, apenas um container de conteúdo */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1716,14 +1719,32 @@ input:checked + .slider:before {
 
 /* Em telas maiores, ativa as 2 colunas */
 @media (min-width: 992px) { 
-  .add-ia-container {
-    grid-template-columns: 0.8fr 1.2fr; 
+  .add-ia-container.dashboard-card {
+    grid-template-columns: 0.8fr 1.2fr; /* 40% / 60% */
+  }
+  .ia-image-column {
+    /* Adiciona a linha divisória à direita */
+    border-right: 1px solid #e5e7eb;
+  }
+  /* Remove a borda no mobile */
+  .ia-form-column {
+     border-top: 1px solid #e5e7eb;
   }
 }
+@media (min-width: 992px) {
+  .ia-form-column {
+    border-top: none; /* Remove a borda no desktop */
+  }
+}
+
 
 /* --- Card de Fotos Selecionadas (NOVO) --- */
 .selected-photos-card {
   margin-top: 24px; 
+  border: 1px solid #e5e7eb; /* Adiciona borda */
+  border-radius: 12px; /* Adiciona borda arredondada */
+  padding: 24px; /* Adiciona padding interno */
+  background-color: #f9fafb; /* Fundo levemente diferente */
 }
 .selected-photos-header {
   display: flex;
@@ -1772,18 +1793,4 @@ input:checked + .slider:before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* CORREÇÃO DO ERRO 'Unclosed block' */
-.collection-tools-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #f9fafb; 
-  border-radius: 12px 12px 0 0; 
-}
-.collection-search-bar {
-  position: relative;           
 }

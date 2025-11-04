@@ -1,8 +1,7 @@
-// src/pages/AddWithIA.js - VERSÃO CORRIGIDA (Ícone MdAutoAwesome)
+// src/pages/AddWithIA.js - VERSÃO COM LAYOUT INTEGRADO
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// *** MUDANÇA AQUI: Trocado MdSparkles por MdAutoAwesome ***
 import { MdCloudUpload, MdAutoAwesome } from 'react-icons/md'; 
 
 const allCategories = [
@@ -73,7 +72,9 @@ function AddWithIA() {
         return;
     }
     
-    setStep(2);
+    setStep(2); // Muda para a "etapa" 2 (que é apenas preencher o form)
+    
+    // Simulação de IA preenchendo dados
     setFormData(prev => ({
       ...prev,
       nome: "Scooby-Doo The Mystery Machine",
@@ -100,12 +101,18 @@ function AddWithIA() {
         </div>
       </header>
 
-      <form onSubmit={handleSubmit} className="add-ia-container">
+      {/* *** MUDANÇA AQUI *** A classe 'dashboard-card' agora está no form,
+          tornando-se o container principal de 2 colunas.
+      */}
+      <form onSubmit={handleSubmit} className="add-ia-container dashboard-card">
 
+        {/* ====================================================== */}
         {/* COLUNA DA ESQUERDA (Upload) */}
+        {/* ====================================================== */}
         <div className="ia-image-column">
           
-          <div className="dashboard-card ia-upload-card">
+          {/* Card 1: Upload (Não é mais um 'dashboard-card') */}
+          <div className="ia-upload-card-content">
             <div className="ia-upload-content">
               {imagePreviews.length > 0 ? (
                  <div className="ia-image-placeholder" onClick={handleImageSelect} style={{cursor: 'pointer'}}>
@@ -128,15 +135,14 @@ function AddWithIA() {
                 onClick={handleSearchAI}
                 disabled={imageFiles.length === 0}
               >
-                {/* *** MUDANÇA AQUI: Ícone corrigido *** */}
                 <MdAutoAwesome /> Buscar com IA
               </button>
             </div>
           </div>
 
-          {/* Card 2: Fotos Selecionadas */}
+          {/* Card 2: Fotos Selecionadas (Não é mais um 'dashboard-card') */}
           {imagePreviews.length > 0 && (
-            <div className="dashboard-card selected-photos-card">
+            <div className="selected-photos-card">
               <div className="selected-photos-header">
                 <h4>Fotos Selecionadas ({imagePreviews.length})</h4>
                 <button 
@@ -159,10 +165,14 @@ function AddWithIA() {
 
         </div>
 
+        {/* ====================================================== */}
         {/* COLUNA DA DIREITA (Formulário) */}
+        {/* ====================================================== */}
         <div className="ia-form-column">
-          <div className="dashboard-card"> 
+          {/* O 'dashboard-card' que estava aqui foi removido */}
+          <div> 
             
+            {/* SEÇÃO INFORMAÇÕES BÁSICAS (COM "JÁ SEI") */}
             <div className="form-section">
               <h4>Informações Básicas</h4>
               <p className="form-section-subtitle">A IA preencheu os campos. Marque "Já sei" para os campos que você quer manter.</p>
@@ -230,6 +240,7 @@ function AddWithIA() {
               </div>
             </div>
 
+            {/* SEÇÃO DETALHES DO ITEM (COM "JÁ SEI") */}
             <div className="form-section">
               <h4>Detalhes do Item</h4>
               <div className="form-row">
@@ -283,7 +294,9 @@ function AddWithIA() {
               />
             </div>
             
-            <footer className="modal-footer" style={{ borderTop: '1px solid #e5e7eb', background: 'none', padding: '16px 0 0 0' }}>
+            {/* Botões do Formulário */}
+            {/* *** MUDANÇA AQUI: Adicionada classe ia-form-footer *** */}
+            <footer className="modal-footer ia-form-footer">
               <button type="button" className="btn-cancel" onClick={() => navigate('/my-collection')}>
                 Cancelar
               </button>

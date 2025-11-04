@@ -1,10 +1,10 @@
-// src/App.js - VERSÃO CORRIGIDA (Caminho Register e Rota MyShowcase)
+// src/App.js - CÓDIGO CORRETO E COMPLETO
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; 
 
 import Login from './pages/Login';
-import Register from './pages/Register'; // <-- 1. CAMINHO CORRIGIDO
+import Register from './pages/Register'; // <-- 1. CORREÇÃO DO CAMINHO
 import PasswordRecovery from './pages/PasswordRecovery';
 import Home from './pages/Home'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
@@ -14,7 +14,7 @@ import AddItem from './pages/AddItem';
 import ItemDetail from './pages/ItemDetail';
 import EditItem from './pages/EditItem';
 import AddWithIA from './pages/AddWithIA';
-import MyShowcase from './pages/MyShowcase';
+import MyShowcase from './pages/MyShowcase'; // Esta linha já estava certa
 import Messages from './pages/Messages';
 import PreVendas from './pages/PreVendas';
 
