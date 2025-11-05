@@ -1,4 +1,4 @@
-/* src/App.css - VERSÃO COMPLETA (COM BOTÃO DE COMPARTILHAR VITRINE) */
+/* src/App.css - VERSÃO COMPLETA (COM VITRINE SOCIAL) */
 
 body {
   margin: 0;
@@ -2010,5 +2010,5 @@ input:checked + .slider:before {
     width: auto; 
     padding: 10px 14px; 
     font-size: 0.9rem;
-  }
+  } 
 }

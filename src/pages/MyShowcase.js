@@ -1,8 +1,8 @@
-// src/pages/MyShowcase.js - ATUALIZADO (com novas estatísticas)
+// src/pages/MyShowcase.js - ATUALIZADO (com Navegação Social)
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react'; // Adicionado useState
 import { useNavigate } from 'react-router-dom';
-import { MdEdit, MdShare } from 'react-icons/md';
+import { MdEdit, MdShare, MdSearch } from 'react-icons/md'; // Adicionado MdSearch
 
 // --- DADOS SIMULADOS (Os mesmos de antes) ---
 const initialCollectionData = [
@@ -34,14 +34,13 @@ const initialCollectionData = [
     img: "https://images.pokemontcg.io/swsh4/136_hires.png",
   },
 ];
-// --- FIM DOS DADOS SIMULADOS ---
-
-// *** ADICIONADO: Lista de Categorias para contagem ***
 const allCategories = [
     "Cartas Pokémon", "Cartas Magic", "Cartas Esportivas", "Figuras de Ação",
     "Miniaturas", "Comics/HQs", "Livros", "Moedas", "Selos", "Arte",
     "Relógios", "Vinhos", "Discos de Vinil", "Videogames", "Outros"
 ];
+// --- FIM DOS DADOS SIMULADOS ---
+
 
 // --- COMPONENTE DO CARD ---
 const CollectionCard = ({ item, onClick }) => (
@@ -66,6 +65,8 @@ const CollectionCard = ({ item, onClick }) => (
 
 function MyShowcase() {
   const navigate = useNavigate();
+  // Estado para controlar a aba ativa (Minha Vitrine, Comunidade, Amigos)
+  const [activeTab, setActiveTab] = useState('vitrine'); 
 
   const vitrineItems = useMemo(() => {
     return initialCollectionData.filter(item => item.visivelVitrine === true);
@@ -79,11 +80,55 @@ function MyShowcase() {
     alert('Simulação: Link da vitrine copiado para a área de transferência!');
   };
 
+  // Função para renderizar o conteúdo da aba selecionada
+  const renderTabContent = () => {
+    if (activeTab === 'vitrine') {
+      return (
+        <div className="vitrine-grid-container">
+          <h4>Itens na Vitrine</h4>
+          <div className="collection-grid">
+            {vitrineItems && vitrineItems.length > 0 ? (
+              vitrineItems.map((item) => (
+                <CollectionCard
+                  key={item.id}
+                  item={item}
+                  onClick={() => handleCardClick(item.id)}
+                />
+              ))
+            ) : (
+              <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#6b7280' }}>
+                Você ainda não adicionou nenhum item à sua vitrine.
+              </p>
+            )}
+          </div>
+        </div>
+      );
+    }
+    // Placeholders para as outras abas
+    if (activeTab === 'comunidade') {
+      return (
+        <div className="vitrine-grid-container">
+          <h4>Itens da Comunidade</h4>
+          <p style={{ textAlign: 'center', color: '#6b7280' }}>Em breve...</p>
+        </div>
+      );
+    }
+    if (activeTab === 'amigos') {
+      return (
+        <div className="vitrine-grid-container">
+          <h4>Itens dos Amigos</h4>
+          <p style={{ textAlign: 'center', color: '#6b7280' }}>Em breve...</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="my-collection-page"> 
       
+      {/* 1. CABEÇALHO DO PERFIL (O que você já tinha) */}
       <div className="dashboard-card vitrine-header-container">
-        
         <div className="vitrine-profile-top">
           <div className="vitrine-profile-left">
             <img 
@@ -96,7 +141,6 @@ function MyShowcase() {
               <span>@vini_diecast</span>
             </div>
           </div>
-          
           <div className="vitrine-button-group">
             <button className="vitrine-edit-btn">
               <MdEdit /> Editar Perfil
@@ -106,10 +150,7 @@ function MyShowcase() {
             </button>
           </div>
         </div>
-        
         <hr className="vitrine-divider" />
-
-        {/* ***** ALTERAÇÃO AQUI: Novas Estatísticas ***** */}
         <div className="vitrine-profile-bottom">
           <div className="vitrine-stats">
             <div className="stat-item">
@@ -126,30 +167,42 @@ function MyShowcase() {
             </div>
           </div>
         </div>
-        {/* ***** FIM DA ALTERAÇÃO ***** */}
-
       </div>
 
-      {/* GRID DA VITRINE */}
-      <div className="vitrine-grid-container">
-        <h4>Itens na Vitrine</h4>
-        
-        <div className="collection-grid">
-          {vitrineItems && vitrineItems.length > 0 ? (
-            vitrineItems.map((item) => (
-              <CollectionCard
-                key={item.id}
-                item={item}
-                onClick={() => handleCardClick(item.id)}
-              />
-            ))
-          ) : (
-            <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#6b7280' }}>
-              Você ainda não adicionou nenhum item à sua vitrine.
-            </p>
-          )}
+      {/* 2. NOVA SEÇÃO: VITRINE SOCIAL (Busca + Abas) */}
+      <div className="dashboard-card vitrine-social-section">
+        <div className="vitrine-search-bar-container">
+          <div className="search-box social-search-box">
+            <MdSearch className="search-icon" />
+            <input type="text" placeholder="Buscar em todas as vitrines..." />
+          </div>
+        </div>
+
+        <div className="vitrine-social-tabs">
+          <button 
+            className={`social-tab-btn ${activeTab === 'vitrine' ? 'active' : ''}`}
+            onClick={() => setActiveTab('vitrine')}
+          >
+            <span className="tab-icon">💁‍♂️</span> Minha Vitrine
+          </button>
+          <button 
+            className={`social-tab-btn ${activeTab === 'comunidade' ? 'active' : ''}`}
+            onClick={() => setActiveTab('comunidade')}
+          >
+            <span className="tab-icon">🌐</span> Comunidade
+          </button>
+          <button 
+            className={`social-tab-btn ${activeTab === 'amigos' ? 'active' : ''}`}
+            onClick={() => setActiveTab('amigos')}
+          >
+            <span className="tab-icon">👥</span> Amigos
+          </button>
         </div>
       </div>
+
+      {/* 3. GRID DE ITENS (Agora controlado pelo estado da aba) */}
+      {renderTabContent()}
+
     </div>
   );
 }
